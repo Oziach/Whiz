@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) {
 
         if (locked){ return; }
-        LevelManager.Instance.LoadNextLevel();
+        LevelManager.Instance.LoadNextScene();
     } 
         
     public void UnlockDoor() {

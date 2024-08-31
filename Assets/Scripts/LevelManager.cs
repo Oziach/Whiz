@@ -43,19 +43,13 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(currSceneIndex);
     }
 
-    private static void LoadNextScene() {
-        //restart the level
-        var currSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currSceneIndex+1);
-    }
-
     public void RestartLevel(float restartDelay = -1f) {
         restartDelay = restartDelay == -1f ? defaultLevelRestartDelay : restartDelay;
         restart = true;
         timeToRestart = restartDelay;
     }
 
-    public void LoadNextLevel() {
-        RestartLevel(0f);
+    public void LoadNextScene() {
+        GameManager.Instance.LoadNextScene();
     }
 }
