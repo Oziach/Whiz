@@ -20,6 +20,9 @@ public class PlayerAnimHandler : MonoBehaviour
     [SerializeField] Animator handsAnimator;
     [SerializeField] Animator wandAnimator;
 
+    [SerializeField] GameObject gravcastDirectionArrowPrefab;
+    [SerializeField] GameObject gravcastDirectionArrowOrigin;
+
     Vector3 originalSpriteLocalPosition;
 
 
@@ -27,7 +30,9 @@ public class PlayerAnimHandler : MonoBehaviour
     void Start()
     {
         playerCasting.OnSpellCasted += PlayerCasting_OnSpellCasted;
+
     }
+
 
     private void PlayerCasting_OnSpellCasted(object sender, PlayerCasting.SpellcastEventArgs e) {
         HandsAttackAnimation(e);
@@ -53,5 +58,6 @@ public class PlayerAnimHandler : MonoBehaviour
 
     private void OnDestroy() {
         playerCasting.OnSpellCasted -= PlayerCasting_OnSpellCasted;
+
     }
 }

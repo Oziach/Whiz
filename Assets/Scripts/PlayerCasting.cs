@@ -12,7 +12,7 @@ public class PlayerCasting : MonoBehaviour
         public Vector2 direction { get; set; }
     }
     public event EventHandler<SpellcastEventArgs> OnSpellCasted;
-
+    public event EventHandler<SpellcastEventArgs> OnGravcast;
 
 
     [SerializeField] CustomGravityObject customGravityObject;
@@ -23,8 +23,6 @@ public class PlayerCasting : MonoBehaviour
     [SerializeField] Transform wandPopOrigin;
     [SerializeField] Transform spellcastOrigin;
     [SerializeField] float spellcastOffset;
-
-    [SerializeField] GameObject gravityDirectionArrow;
 
 
     [SerializeField] private float rechargeTime = 0f;
@@ -103,9 +101,10 @@ public class PlayerCasting : MonoBehaviour
     private void Gravcast() {
         Vector2 newGravityDirection = RotationToDirection();
         customGravityObject.SetGravityDirection(newGravityDirection);
+        OnGravcast?.Invoke(this, new SpellcastEventArgs { direction = newGravityDirection });
     }
 
-    private Vector2 RotationToDirection() {
+    public Vector2 RotationToDirection() {
         switch (currentGravityRotation) {
             case 0:
                 return Vector2.up;
@@ -147,6 +146,7 @@ public class PlayerCasting : MonoBehaviour
         }
     }
 
+    
     public bool IsRecharging() {
         return recharging;
     }

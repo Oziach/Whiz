@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6632681017499623122}
   - component: {fileID: 3081867033384748331}
   - component: {fileID: 3851525312603961775}
+  - component: {fileID: -3354006105505024122}
   m_Layer: 0
   m_Name: GravityChangedOthersVFX
   m_TagString: Untagged
@@ -55,7 +56,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917244954648035266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 33e066946a8f01d4fb96cad583ae1b41, type: 2}
   m_CullingMode: 0
@@ -107,7 +108,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 357431815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 75b3c4e548f748d4f8dca41e984574af, type: 3}
   m_Color: {r: 0, g: 1, b: 0.96862745, a: 1}
@@ -120,3 +121,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3354006105505024122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917244954648035266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9221245532d57b4d9a1a884f2b78bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.75
+  reverse: 0

@@ -7,12 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {  get; private set; }
 
-    [SerializeField] int level1Index = 2;
+    [SerializeField] int level1Index = 3;
     [SerializeField] int highestPossibleLevel = 1;
     private int highestLevelReached = 1;
 
-    private const int MAIN_MENU_INDEX = 0;
-    private const int LEVEL_SELECT_INDEX = 1;
+    private const int MAIN_MENU_INDEX = 1;
+    private const int LEVEL_SELECT_INDEX = 2;
 
     private void Awake() {
         if (Instance) {

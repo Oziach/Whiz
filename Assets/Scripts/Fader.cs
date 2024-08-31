@@ -10,10 +10,15 @@ public class Fader : MonoBehaviour
     [SerializeField] bool reverse;
 
     private float timeLeft;
+    private float initialAlpha;
 
     private void Awake() {
         timeLeft = fadeTime;
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start() {
+        initialAlpha = spriteRenderer.color.a;
     }
 
     // Update is called once per frame
@@ -23,7 +28,7 @@ public class Fader : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
         Color currColor = spriteRenderer.color;
-        float alpha = timeLeft / fadeTime;
+        float alpha = initialAlpha * timeLeft / fadeTime;
         if (reverse) { alpha = 1 - alpha; }
         spriteRenderer.color = new Color(currColor.r, currColor.g, currColor.b, alpha);
     }
