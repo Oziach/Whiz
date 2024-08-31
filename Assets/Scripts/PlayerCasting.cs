@@ -50,6 +50,7 @@ public class PlayerCasting : MonoBehaviour
 
     private void GameInput_OnSpellcastPerformed(object sender, System.EventArgs e) {
         CastSpell();
+        recharging = true;
     }
 
     public void CastSpell() {

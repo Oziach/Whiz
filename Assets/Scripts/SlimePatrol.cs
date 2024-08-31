@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //this code is exquisitely bad.
@@ -28,7 +29,7 @@ public class SlimePatrol : MonoBehaviour
             Vector2 boxcastOrigin = transform.position;
             Vector2 boxSize = mainCollider.bounds.size;
             Vector2 boxcastDirection = Vector2.right * Mathf.Sign(movement.x);
-            float boxcastDistance = movement.x + moveBufferDistance;
+            float boxcastDistance = movement.x + moveBufferDistance + Physics2D.defaultContactOffset ;
 
             bool canMoveInVelDir = true;
             //first raycast
@@ -37,13 +38,27 @@ public class SlimePatrol : MonoBehaviour
                 canMoveInVelDir = false;
             }
             else {
+
+                float movementSign = Mathf.Sign(movement.x);
+                Vector2 raycastOrigin = transform.position;
+                raycastOrigin += new Vector2(movementSign * (mainCollider.bounds.size.x / 2 + Mathf.Abs(movement.x) + moveBufferDistance), gravityDirection.y * mainCollider.bounds.size.y / 2);
+                Vector2 raycastDirection = gravityDirection;
+                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                Debug.Log("Can move in direction no wall: " + boxcastDirection);
+      
+
                 //else, perform a second boxcast to check we onl move if we remain grounded
-                boxcastOrigin.x += movement.x + (Mathf.Sign(movement.x) * (moveBufferDistance + mainCollider.bounds.size.x));
+  
+                Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
+                
+                boxcastOrigin.x += movement.x + Mathf.Sign(movement.x) * (moveBufferDistance + mainCollider.bounds.size.x);
                 boxcastDirection = gravityDirection;
                 boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
-
+                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
                 if (!hit2) { canMoveInVelDir = false; }
+                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.x)); }
+
 
             }
 
@@ -55,7 +70,7 @@ public class SlimePatrol : MonoBehaviour
             boxcastOrigin = transform.position;
             boxSize = mainCollider.bounds.size;
             boxcastDirection = Vector2.right * -Mathf.Sign(movement.x);
-            boxcastDistance = movement.x + moveBufferDistance;
+            boxcastDistance = movement.x + moveBufferDistance + Physics2D.defaultContactOffset;
 
             bool canMoveAgainstVelDir = true;
 
@@ -66,14 +81,24 @@ public class SlimePatrol : MonoBehaviour
                 canMoveAgainstVelDir = false;
             }
             else {
+
+                float movementSign = -Mathf.Sign(movement.x);
+                Vector2 raycastOrigin = transform.position;
+                raycastOrigin += new Vector2(movementSign * (mainCollider.bounds.size.x / 2 + Mathf.Abs(movement.x) + moveBufferDistance), gravityDirection.y * mainCollider.bounds.size.y / 2);
+                Vector2 raycastDirection = gravityDirection;
+                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+
+                Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
+                Debug.Log("Can move in direction no wall: " + boxcastDirection);
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.x -= movement.x + (Mathf.Sign(movement.x) * (moveBufferDistance+ mainCollider.bounds.size.x));
                 boxcastDirection = gravityDirection;
                 boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
                 if (!hit2) { canMoveAgainstVelDir = false; }
-
+                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.x)); }
             }
 
             if (canMoveAgainstVelDir) { rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y); }
@@ -90,7 +115,7 @@ public class SlimePatrol : MonoBehaviour
             Vector2 boxcastOrigin = transform.position;
             Vector2 boxSize = mainCollider.bounds.size;
             Vector2 boxcastDirection = Vector2.up * Mathf.Sign(movement.y);
-            float boxcastDistance = movement.y + moveBufferDistance;
+            float boxcastDistance = movement.y + moveBufferDistance + Physics2D.defaultContactOffset;
 
             bool canMoveInVelDir = true;
             //first raycast
@@ -99,13 +124,26 @@ public class SlimePatrol : MonoBehaviour
                 canMoveInVelDir = false;
             }
             else {
+                float movementSign = Mathf.Sign(movement.y);
+                Vector2 raycastOrigin = transform.position;
+                raycastOrigin += new Vector2(gravityDirection.x * mainCollider.bounds.size.x / 2, movementSign * (mainCollider.bounds.size.y / 2 + Mathf.Abs(movement.y) + moveBufferDistance));
+                Vector2 raycastDirection = gravityDirection;
+                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+
+                Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
+
+                Debug.Log("Can move in direction no wall: " + boxcastDirection);
+
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.y += movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
                 boxcastDirection = gravityDirection;
                 boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
 
                 if (!hit2) { canMoveInVelDir = false; }
+                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.y)); }
 
             }
 
@@ -126,13 +164,25 @@ public class SlimePatrol : MonoBehaviour
                 canMoveAgainstVelDir = false;
             }
             else {
+
+                float movementSign = -Mathf.Sign(movement.y);
+                Vector2 raycastOrigin = transform.position;
+                raycastOrigin += new Vector2(gravityDirection.x * mainCollider.bounds.size.x / 2, movementSign * (mainCollider.bounds.size.y / 2 + Mathf.Abs(movement.y) + moveBufferDistance));
+                Vector2 raycastDirection = gravityDirection;
+                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+
+                Debug.Log("Can move in direction no wall: " + boxcastDirection);
+
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.y = movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
                 boxcastDirection = gravityDirection;
                 boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
 
                 if (!hit2) { canMoveAgainstVelDir = false; }
+                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.y)); }
 
             }
 

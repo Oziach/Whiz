@@ -6,7 +6,20 @@ using UnityEngine.SceneManagement;
 public class Loader : MonoBehaviour
 {
 
-    public void LoadNextScene() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    public void LoadLevel(int level) {
+        GameManager.Instance.LoadLevel(level);
+    }
+
+    public void LoadMainMenu() {
+        GameManager.Instance.LoadMainMenu();
+    }
+
+    public void LoadLevelSelect() {
+        GameManager.Instance.LoadLevelSelect();
+    }
+
+
+    public void LoadLatestLevel() {
+        GameManager.Instance.LoadLatestLevel();
     }
 }

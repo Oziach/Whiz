@@ -7,9 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance {  get; private set; }
 
-    [SerializeField] int level1Index = 1;
+    [SerializeField] int level1Index = 2;
     [SerializeField] int highestPossibleLevel = 1;
     private int highestLevelReached = 1;
+
+    private const int MAIN_MENU_INDEX = 0;
+    private const int LEVEL_SELECT_INDEX = 1;
 
     private void Awake() {
         if (Instance) {
@@ -46,6 +49,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(level1Index + level - 1);
     }
 
+    public void LoadMainMenu() {
+        SceneManager.LoadScene(MAIN_MENU_INDEX);
+    }
+
+    public void LoadLevelSelect() {
+        SceneManager.LoadScene(LEVEL_SELECT_INDEX);
+    }
 
     //getters and setters
     public void SetHighestLevelReached(int level) {
