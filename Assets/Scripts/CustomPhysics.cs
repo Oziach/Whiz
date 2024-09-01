@@ -8,11 +8,11 @@ public class CustomPhysics : MonoBehaviour {
     [SerializeField] BoxCollider2D[] boxColliders;
     [SerializeField] ContactFilter2D contactFilter2D;
     [SerializeField] CustomGravityObject customGravityObject;
-    
+    [SerializeField] float screwUnityExtentCheckMagicNumber = 0.0025f;
 
     Rigidbody2D rb; //required component
     public bool isGrounded; //exposed for debugging
-    [SerializeField] private float skinThickness = 0.01f;
+    private float skinThickness;
 
     public Vector2 velocity;
 
@@ -24,15 +24,17 @@ public class CustomPhysics : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+
         Vector2 movement = velocity * Time.fixedDeltaTime;
         isGrounded = false;
 
         Vector2 finalPosition = rb.position;
-  
-        VerticalMovemement(movement, ref finalPosition);
+
         HorizontalMovemement(movement, ref finalPosition);
+        VerticalMovemement(movement, ref finalPosition);
+
         rb.MovePosition(finalPosition);//
-    
+
 
     }
 
@@ -55,42 +57,55 @@ public class CustomPhysics : MonoBehaviour {
             int numberOfHits = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, contactFilter2D, hits, boxcastDistance);
             int numberOfOtherHits = 0; //if only self hit, then this will remain zero
 
+  
+            var hitRay = Physics2D.Raycast(new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), Vector2.down, 1f, contactFilter2D.layerMask);
+            Debug.Log("raycast hit distance results: " + hitRay.distance + " " + hitRay.point);
 
-                foreach (RaycastHit2D hit in hits) {
+            foreach (RaycastHit2D hit in hits) {
 
-                    if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
-                    numberOfOtherHits++;
+                if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
+               
+                if (hit.point.x - boxCollider.bounds.min.x < -screwUnityExtentCheckMagicNumber || hit.point.x - boxCollider.bounds.max.x > screwUnityExtentCheckMagicNumber) {
+                    continue; 
+                }
 
-                    if (hit.distance <= 0f) {
+                numberOfOtherHits++;
+
+
+                if (hit.distance <= 0f) {
                     Debug.Log("Physics update. Me " + gameObject.name + " is resolving vertical clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
-                            finalPosition.x = (hit.point + hit.normal * (boxCollider.bounds.extents.x + skinThickness)).x;
-                        }
-                        else if (Mathf.Abs(hit.normal.x) < 0.1f && Mathf.Abs(hit.normal.y) > 0.99f) {
+                        finalPosition.x = (hit.point + hit.normal * (boxCollider.bounds.extents.x + skinThickness)).x;
+                    }
+                    else if (Mathf.Abs(hit.normal.x) < 0.1f && Mathf.Abs(hit.normal.y) > 0.99f) {
 
-                            finalPosition.y = (hit.point + hit.normal * (boxCollider.bounds.extents.y + skinThickness)).y;
-                        }
-
-                        transform.position = finalPosition; //if clipping, directly move. don't interpolate using rb.move
-                        rb.position = finalPosition;
-                        continue;
+                        finalPosition.y = (hit.point + hit.normal * (boxCollider.bounds.extents.y + skinThickness)).y;
                     }
 
-                    finalPosition.y = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.y)))).y;
-                    velocity = new Vector2(velocity.x, customGravityObject.GetGravityDirection().y); //have unit velocity in gravity direction to prevent clipping issues at tiny units
+                    transform.position = finalPosition; //if clipping, directly move. don't interpolate using rb.move
+                    rb.position = finalPosition;
 
-                    //set grounded
-                    if (customGravityObject.GetGravityDirection().y == Mathf.Sign(movement.y)) { isGrounded = true; }
-
-                    ///////////////////IMPORTANT///////////////////////////
-                    ///FOR NOW, I'LL CHECK ONLY FOR A SINGLE HIT, WHICH WOULD BE THE FIRST THING WE HIT. SO IF WE FIX THIS FOR BOX COLLIDERS IN PARTICULAR, IT'LL AUTOMATICALLY ALSO NOT HIT OTHER HITS
-                    break;
+                    break ;
                 }
-   
 
-            if (numberOfOtherHits == 0){
-                    finalPosition = new Vector2(finalPosition.x, rb.position.y + movement.y);
+
+                finalPosition.y = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.y)))).y;
+                velocity = new Vector2(velocity.x, customGravityObject.GetGravityDirection().y); //have unit velocity in gravity direction to prevent clipping issues at tiny units
+                //Debug.DrawRay(new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), hit.point - new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), Color.white);
+
+                //set grounded
+                if (customGravityObject.GetGravityDirection().y == Mathf.Sign(movement.y)) { isGrounded = true; }
+
+                ///////////////////IMPORTANT///////////////////////////
+                ///FOR NOW, I'LL CHECK ONLY FOR A SINGLE HIT, WHICH WOULD BE THE FIRST THING WE HIT. SO IF WE FIX THIS FOR BOX COLLIDERS IN PARTICULAR, IT'LL AUTOMATICALLY ALSO NOT HIT OTHER HITS
+                break;
+            }
+
+
+            if (numberOfOtherHits == 0) {
+                finalPosition = new Vector2(finalPosition.x, rb.position.y + movement.y);
+
             }
 
         }
@@ -109,7 +124,7 @@ public class CustomPhysics : MonoBehaviour {
 
 
             float boxcastDistance = movement.x == 0f ? 0 : Mathf.Abs(movement.x) + skinThickness;
-       
+
 
             List<RaycastHit2D> hits = new List<RaycastHit2D>();
             int numberOfHits = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, contactFilter2D, hits, boxcastDistance);
@@ -117,42 +132,46 @@ public class CustomPhysics : MonoBehaviour {
 
             //Debug.Log(numberOfHits);
 
-                //ahhh i see the problem. you'll have to recheck after fixing for every single hit. my god.
-                foreach (RaycastHit2D hit in hits) {
 
-                    if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
-                    numberOfOtherHits++;
 
-                    if (hit.distance <= 0) {
+            //ahhh i see the problem. you'll have to recheck after fixing for every single hit. my god.
+            foreach (RaycastHit2D hit in hits) {
+
+                if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
+                if(hit.point.y < boxCollider.bounds.min.y|| hit.point.y > boxCollider.bounds.max.y) { continue; }
+                numberOfOtherHits++;
+
+
+                if (hit.distance <= 0) {
                     Debug.Log("Physics update. Me," + gameObject.name + "is resolving horizontal clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
-                            finalPosition.x = (hit.point + hit.normal * (boxCollider.bounds.extents.x + skinThickness)).x;
-                        }
-                        else if (Mathf.Abs(hit.normal.x) < 0.1f && Mathf.Abs(hit.normal.y) > 0.99f) {
-                            finalPosition.y = (hit.point + hit.normal * (boxCollider.bounds.extents.y + skinThickness)).y;
-                        }
-
-                        transform.position = finalPosition;  //if clipping, directly move. don't interpolate using rb.move
-                        rb.position = finalPosition;
-                        continue;
+                        finalPosition.x = (hit.point + hit.normal * (boxCollider.bounds.extents.x + skinThickness)).x;
+                    }
+                    else if (Mathf.Abs(hit.normal.x) < 0.1f && Mathf.Abs(hit.normal.y) > 0.99f) {
+                        finalPosition.y = (hit.point + hit.normal * (boxCollider.bounds.extents.y + skinThickness)).y;
                     }
 
-                    finalPosition.x = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.x)))).x;
-                    velocity = new Vector2(customGravityObject.GetGravityDirection().x, velocity.y);
-
-                    //set gorunded
-                    if (customGravityObject.GetGravityDirection().x == Mathf.Sign(movement.x)) { isGrounded = true; }
-
-                    ///////////////////IMPORTANT///////////////////////////
-                    ///FOR NOW, I'LL CHECK ONLY FOR A SINGLE HIT, WHICH WOULD BE THE FIRST THING WE HIT. SO IF WE FIX THIS FOR BOX COLLIDERS IN PARTICULAR, IT'LL AUTOMATICALLY ALSO NOT HIT OTHER HITS
-                    break;
-
+                    transform.position = finalPosition;  //if clipping, directly move. don't interpolate using rb.move
+                    rb.position = finalPosition;
+                    break ;
                 }
 
+                finalPosition.x = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.x)))).x;
+                velocity = new Vector2(customGravityObject.GetGravityDirection().x, velocity.y);
+
+                //set gorunded
+                if (customGravityObject.GetGravityDirection().x == Mathf.Sign(movement.x)) { isGrounded = true; }
+
+                ///////////////////IMPORTANT///////////////////////////
+                ///FOR NOW, I'LL CHECK ONLY FOR A SINGLE HIT, WHICH WOULD BE THE FIRST THING WE HIT. SO IF WE FIX THIS FOR BOX COLLIDERS IN PARTICULAR, IT'LL AUTOMATICALLY ALSO NOT HIT OTHER HITS
+                break;
+
+            }
 
 
-            if (numberOfOtherHits == 0){ //if this collider's boxcast doesn't hit anything
+
+            if (numberOfOtherHits == 0) { //if this collider's boxcast doesn't hit anything
                 finalPosition = new Vector2(rb.position.x + movement.x, finalPosition.y);
             }
 
@@ -169,7 +188,7 @@ public class CustomPhysics : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
+        skinThickness = Physics2D.defaultContactOffset;
     }
 
     // Update is called once per frame

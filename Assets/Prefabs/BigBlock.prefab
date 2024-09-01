@@ -80,21 +80,21 @@ MonoBehaviour:
   - {fileID: 3905109000673328526}
   contactFilter2D:
     useTriggers: 0
-    useLayerMask: 0
+    useLayerMask: 1
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 72
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 2215634642365402124}
+  screwUnityExtentCheckMagicNumber: 0.001
   isGrounded: 0
-  skinThickness: 0.005
   velocity: {x: 0, y: 0}
 --- !u!114 &2215634642365402124
 MonoBehaviour:
@@ -131,7 +131,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  skinThickness: 0.005
+  skinThickness: 0.01
   bufferDistance: 0
 --- !u!1 &3996886870579840263
 GameObject:
@@ -208,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9725, y: 0.9725}
+  m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
 --- !u!1 &7637321883304090582
 GameObject:
