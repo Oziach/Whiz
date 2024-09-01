@@ -13,9 +13,14 @@ public class SlimePatrol : MonoBehaviour
     [SerializeField] CustomPhysics rb;
     [SerializeField] CustomGravityObject customGravityObject;
     [SerializeField] LayerMask groundMask;
+    float skinThickness;
 
     private void FixedUpdate() {
 
+    }
+
+    private void Start() {
+        skinThickness = rb.getSkinThickness();
     }
 
     public void HandleVelocityFlipping() {
@@ -29,7 +34,7 @@ public class SlimePatrol : MonoBehaviour
             Vector2 boxcastOrigin = transform.position;
             Vector2 boxSize = mainCollider.bounds.size;
             Vector2 boxcastDirection = Vector2.right * Mathf.Sign(movement.x);
-            float boxcastDistance = movement.x + moveBufferDistance + Physics2D.defaultContactOffset ;
+            float boxcastDistance = movement.x + moveBufferDistance + skinThickness ;
 
             bool canMoveInVelDir = true;
             //first raycast
@@ -43,7 +48,7 @@ public class SlimePatrol : MonoBehaviour
                 Vector2 raycastOrigin = transform.position;
                 raycastOrigin += new Vector2(movementSign * (mainCollider.bounds.size.x / 2 + Mathf.Abs(movement.x) + moveBufferDistance), gravityDirection.y * mainCollider.bounds.size.y / 2);
                 Vector2 raycastDirection = gravityDirection;
-                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                float raycastDistance = skinThickness + groundBufferDistance;
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
       
 
@@ -53,7 +58,7 @@ public class SlimePatrol : MonoBehaviour
                 
                 boxcastOrigin.x += movement.x + Mathf.Sign(movement.x) * (moveBufferDistance + mainCollider.bounds.size.x);
                 boxcastDirection = gravityDirection;
-                boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                boxcastDistance = skinThickness + groundBufferDistance;
                 //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
                 RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
                 if (!hit2) { canMoveInVelDir = false; }
@@ -70,7 +75,7 @@ public class SlimePatrol : MonoBehaviour
             boxcastOrigin = transform.position;
             boxSize = mainCollider.bounds.size;
             boxcastDirection = Vector2.right * -Mathf.Sign(movement.x);
-            boxcastDistance = movement.x + moveBufferDistance + Physics2D.defaultContactOffset;
+            boxcastDistance = movement.x + moveBufferDistance + skinThickness;
 
             bool canMoveAgainstVelDir = true;
 
@@ -86,14 +91,14 @@ public class SlimePatrol : MonoBehaviour
                 Vector2 raycastOrigin = transform.position;
                 raycastOrigin += new Vector2(movementSign * (mainCollider.bounds.size.x / 2 + Mathf.Abs(movement.x) + moveBufferDistance), gravityDirection.y * mainCollider.bounds.size.y / 2);
                 Vector2 raycastDirection = gravityDirection;
-                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                float raycastDistance = skinThickness + groundBufferDistance;
 
                 Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.x -= movement.x + (Mathf.Sign(movement.x) * (moveBufferDistance+ mainCollider.bounds.size.x));
                 boxcastDirection = gravityDirection;
-                boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                boxcastDistance = skinThickness + groundBufferDistance;
                 //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
                 RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
@@ -115,7 +120,7 @@ public class SlimePatrol : MonoBehaviour
             Vector2 boxcastOrigin = transform.position;
             Vector2 boxSize = mainCollider.bounds.size;
             Vector2 boxcastDirection = Vector2.up * Mathf.Sign(movement.y);
-            float boxcastDistance = movement.y + moveBufferDistance + Physics2D.defaultContactOffset;
+            float boxcastDistance = movement.y + moveBufferDistance + skinThickness;
 
             bool canMoveInVelDir = true;
             //first raycast
@@ -128,7 +133,7 @@ public class SlimePatrol : MonoBehaviour
                 Vector2 raycastOrigin = transform.position;
                 raycastOrigin += new Vector2(gravityDirection.x * mainCollider.bounds.size.x / 2, movementSign * (mainCollider.bounds.size.y / 2 + Mathf.Abs(movement.y) + moveBufferDistance));
                 Vector2 raycastDirection = gravityDirection;
-                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                float raycastDistance = skinThickness + groundBufferDistance;
 
                 Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
 
@@ -137,7 +142,7 @@ public class SlimePatrol : MonoBehaviour
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.y += movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
                 boxcastDirection = gravityDirection;
-                boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                boxcastDistance = skinThickness + groundBufferDistance;
                 RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
                 //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
@@ -169,14 +174,14 @@ public class SlimePatrol : MonoBehaviour
                 Vector2 raycastOrigin = transform.position;
                 raycastOrigin += new Vector2(gravityDirection.x * mainCollider.bounds.size.x / 2, movementSign * (mainCollider.bounds.size.y / 2 + Mathf.Abs(movement.y) + moveBufferDistance));
                 Vector2 raycastDirection = gravityDirection;
-                float raycastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                float raycastDistance = skinThickness + groundBufferDistance;
 
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
 
                 //else, perform a second boxcast to check we onl move if we remain grounded
                 boxcastOrigin.y = movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
                 boxcastDirection = gravityDirection;
-                boxcastDistance = Physics2D.defaultContactOffset + groundBufferDistance;
+                boxcastDistance = skinThickness + groundBufferDistance;
                 RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
                 //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
@@ -190,12 +195,6 @@ public class SlimePatrol : MonoBehaviour
 
             if (!canMoveInVelDir && !canMoveAgainstVelDir) { rb.velocity = new Vector2(rb.velocity.x, 0f); }
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

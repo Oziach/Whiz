@@ -10,7 +10,7 @@ public class GravColliderController : MonoBehaviour
     [SerializeField] GameObject superParent;
     [SerializeField] Rigidbody2D superParentRb;
     [SerializeField] LayerMask layerMask;
-
+    [SerializeField] float skinThickness = 0.01f;
     [SerializeField] float bufferDistance;
     // Start is called before the first frame update
     void Start()
@@ -55,7 +55,7 @@ public class GravColliderController : MonoBehaviour
             ResetColliders();
 
             float boxcastDist = collider.bounds.size.y / 2;
-            Vector2 boxSize = new Vector2(collider.bounds.size.x, 2 * Physics2D.defaultContactOffset);
+            Vector2 boxSize = new Vector2(collider.bounds.size.x, 2 * skinThickness);
 
             //check for up/down
             hit = Physics2D.BoxCast(transform.position, boxSize, 0, newGravityDir, boxcastDist, layerMask);
@@ -68,7 +68,7 @@ public class GravColliderController : MonoBehaviour
             }
 
             if (hit) {
-                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + Physics2D.defaultContactOffset + bufferDistance);
+                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness + bufferDistance);
                 superParentRb.position = (newPosition);
                 superParent.transform.position = (newPosition);
             }
@@ -76,7 +76,7 @@ public class GravColliderController : MonoBehaviour
           
             
             else if (hit2) {
-                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + Physics2D.defaultContactOffset + bufferDistance);
+                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness + bufferDistance);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
             }
@@ -88,7 +88,7 @@ public class GravColliderController : MonoBehaviour
             ResetColliders();
 
             float boxcastDist = collider.bounds.size.x/2;
-            Vector2 boxSize = new Vector2(2 * Physics2D.defaultContactOffset, collider.bounds.size.y);
+            Vector2 boxSize = new Vector2(2 * skinThickness, collider.bounds.size.y);
 
             //check left/right clipping
             hit = Physics2D.BoxCast(transform.position, boxSize, 0, newGravityDir, boxcastDist, layerMask);
@@ -101,7 +101,7 @@ public class GravColliderController : MonoBehaviour
             }
 
             if (hit) {
-                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + Physics2D.defaultContactOffset + bufferDistance);
+                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness + bufferDistance);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
 
@@ -109,7 +109,7 @@ public class GravColliderController : MonoBehaviour
 
             
             else if (hit2) {
-                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + Physics2D.defaultContactOffset + bufferDistance);
+                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness + bufferDistance);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
 

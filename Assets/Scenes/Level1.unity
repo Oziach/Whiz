@@ -10434,6 +10434,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1782051689780094939, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_text
+      value: 'Movement / Aim
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 4358891923374662784, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
       propertyPath: m_Name
       value: Tutorial
@@ -10632,6 +10638,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 853461912585711554, guid: 71bbf49317079fe4492f806bff9619d8, type: 3}
+      propertyPath: skinThickness
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 2352045038381996028, guid: 71bbf49317079fe4492f806bff9619d8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.32
@@ -10671,6 +10681,10 @@ PrefabInstance:
     - target: {fileID: 2352045038381996028, guid: 71bbf49317079fe4492f806bff9619d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430121381652608407, guid: 71bbf49317079fe4492f806bff9619d8, type: 3}
+      propertyPath: skinThickness
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5034297731631619438, guid: 71bbf49317079fe4492f806bff9619d8, type: 3}
       propertyPath: m_Name
