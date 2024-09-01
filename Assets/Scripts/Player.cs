@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     PlayerMovement playerMovement;
+    [SerializeField] CustomPhysics rb;
     [SerializeField] PlayerAnimHandler playerAnimHandler;
 
     [SerializeField] GameObject playerVisual;
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
 
     void Awake() {
         playerMovement = GetComponent<PlayerMovement>();
+        rb = GetComponent<CustomPhysics>();
 
     }
 
@@ -47,6 +49,10 @@ public class Player : MonoBehaviour
     public bool IsRunning() {
         if (!playerMovement) { return false; }
         return playerMovement.IsRunning();
+    }
+
+    public bool IsGrounded() {
+        return rb.IsGrounded();
     }
 
     //getters and setters

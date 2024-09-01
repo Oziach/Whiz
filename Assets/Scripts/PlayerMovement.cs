@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     private CustomGravityObject customGravityObject;
     private CustomPhysics rb;
 
-    [SerializeField] private int moveSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float airResistanceSpeedMultiplier = 0.5f;
 
     private void Awake() {
         rb = GetComponent<CustomPhysics>();
@@ -38,12 +39,15 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movementVector = GameInput.Instance.GetMovementVector();
         Vector2 gravityDir = customGravityObject.GetGravityDirection();
 
+        float speedMul = rb.IsGrounded() ? 1 : airResistanceSpeedMultiplier;
+        float currSpeed = speedMul * moveSpeed;
+
         if (gravityDir == Vector2.down || gravityDir == Vector2.up) {
 
-            rb.velocity = new Vector2(movementVector.x * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(movementVector.x * currSpeed, rb.velocity.y);
         }
         else {
-            rb.velocity = new Vector2(rb.velocity.x, movementVector.y * moveSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, movementVector.y * currSpeed);
         }
     }
 
@@ -51,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!GameInput.Instance) { return false;}
         Vector2 movementVector = GameInput.Instance.GetMovementVector();
+
+        if (!rb.IsGrounded()) { return false; }
 
         if (customGravityObject.GetGravityDirection().x == 0) {
             return movementVector.x != 0;

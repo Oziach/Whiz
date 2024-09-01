@@ -55,7 +55,7 @@ public class GravColliderController : MonoBehaviour
             ResetColliders();
 
             float boxcastDist = collider.bounds.size.y / 2;
-            Vector2 boxSize = new Vector2(collider.bounds.size.x, Physics2D.defaultContactOffset);
+            Vector2 boxSize = new Vector2(collider.bounds.size.x, 2 * Physics2D.defaultContactOffset);
 
             //check for up/down
             hit = Physics2D.BoxCast(transform.position, boxSize, 0, newGravityDir, boxcastDist, layerMask);
@@ -88,7 +88,7 @@ public class GravColliderController : MonoBehaviour
             ResetColliders();
 
             float boxcastDist = collider.bounds.size.x/2;
-            Vector2 boxSize = new Vector2(Physics2D.defaultContactOffset, collider.bounds.size.y);
+            Vector2 boxSize = new Vector2(2 * Physics2D.defaultContactOffset, collider.bounds.size.y);
 
             //check left/right clipping
             hit = Physics2D.BoxCast(transform.position, boxSize, 0, newGravityDir, boxcastDist, layerMask);

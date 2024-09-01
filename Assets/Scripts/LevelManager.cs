@@ -52,4 +52,8 @@ public class LevelManager : MonoBehaviour
     public void LoadNextScene() {
         GameManager.Instance.LoadNextScene();
     }
+
+    public void ShowErrorText() {
+        GameplayUI.Instance?.ShowErrorText();
+    }
 }

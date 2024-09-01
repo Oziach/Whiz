@@ -383,6 +383,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &3926459675920052072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6946840174615348803}
+  m_Layer: 3
+  m_Name: GravityChangeArrowOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6946840174615348803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926459675920052072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09375, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7480910104769368841}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4148020859729582247
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  airResistanceSpeedMultiplier: 0.5
 --- !u!114 &2937433508115266123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,10 +644,9 @@ MonoBehaviour:
   wandPopPrefab: {fileID: 1212566745685196575, guid: e98727c1f817d05418b7b00f24ba53d4, type: 3}
   playerVisual: {fileID: 4340943888432135919}
   wandPopOrigin: {fileID: 4160562412941452148}
-  spellcastOrigin: {fileID: 4160562412941452148}
+  spellcastOrigin: {fileID: 3490844735413061511}
   spellcastOffset: 0.03125
-  gravityDirectionArrow: {fileID: 0}
-  rechargeTime: 1
+  rechargeTime: 0.66
 --- !u!114 &363944975552108998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,7 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravColliderController: {fileID: 2430121381652608407}
-  gravityChangeVelBoost: 1
+  gravityChangeVelBoost: 2.5
   velocityCap: 30
 --- !u!50 &6205848262650766582
 Rigidbody2D:
@@ -723,6 +754,7 @@ Transform:
   m_Children:
   - {fileID: 3768904894517145901}
   - {fileID: 6876597558735927897}
+  - {fileID: 6946840174615348803}
   m_Father: {fileID: 4340943888432135919}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9196735266497646339
@@ -973,6 +1005,8 @@ MonoBehaviour:
   feetAnimator: {fileID: 4557628870823088734}
   handsAnimator: {fileID: 9126912457585832823}
   wandAnimator: {fileID: 7645094561897301100}
+  gravcastDirectionArrowPrefab: {fileID: 917244954648035266, guid: e442667a86707a64aa5340570ed0676a, type: 3}
+  gravcastDirectionArrowOrigin: {fileID: 3926459675920052072}
 --- !u!114 &7090145161565674550
 MonoBehaviour:
   m_ObjectHideFlags: 0

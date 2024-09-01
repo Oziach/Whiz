@@ -8,7 +8,10 @@ public class GameplayUI : MonoBehaviour
 
     public static GameplayUI Instance { get; private set; }
 
+    const string SHOW_ERROR_TEXT_TRIGGER = "ShowErrorTextTrigger";
+
     [SerializeField] GameObject gravityArrow;
+    [SerializeField] Animator errorTextAnim;
 
     private void Awake() {
         if (Instance) {
@@ -33,5 +36,9 @@ public class GameplayUI : MonoBehaviour
 
     public void SetGravityArrowDirection(Vector2 dir) {
         gravityArrow.transform.right = dir;
+    }
+
+    public void ShowErrorText() {
+        errorTextAnim?.SetTrigger(SHOW_ERROR_TEXT_TRIGGER);
     }
 }

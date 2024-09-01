@@ -14,7 +14,7 @@ public class PlayerCasting : MonoBehaviour
     public event EventHandler<SpellcastEventArgs> OnSpellCasted;
     public event EventHandler<SpellcastEventArgs> OnGravcast;
 
-
+    [SerializeField] CustomPhysics rb;
     [SerializeField] CustomGravityObject customGravityObject;
     [SerializeField] GameObject SpellPrefab;
     [SerializeField] GameObject wandPopPrefab;
@@ -44,6 +44,7 @@ public class PlayerCasting : MonoBehaviour
         GameInput.Instance.OnGravcastPerformed += GameInput_OnGravcastPerformed;
         GameInput.Instance.OnSpellcastPerformed += GameInput_OnSpellcastPerformed;
         GameplayUI.Instance.SetGravityArrowDirection(RotationToDirection());
+        rb = GetComponent<CustomPhysics>();
     }
 
     private void GameInput_OnSpellcastPerformed(object sender, System.EventArgs e) {
@@ -53,7 +54,7 @@ public class PlayerCasting : MonoBehaviour
 
     public void CastSpell() {
         if (recharging) { return; }
-
+        Debug.Log(spellcastOrigin.position);
         Vector2 currentGravity = customGravityObject.GetGravityDirection();
 
         Vector2 inputVector = GameInput.Instance ? GameInput.Instance.GetMovementVector() : Vector2.zero;
@@ -99,6 +100,9 @@ public class PlayerCasting : MonoBehaviour
     }
 
     private void Gravcast() {
+
+        if (!rb.IsGrounded()) { return;  }
+
         Vector2 newGravityDirection = RotationToDirection();
         customGravityObject.SetGravityDirection(newGravityDirection);
         OnGravcast?.Invoke(this, new SpellcastEventArgs { direction = newGravityDirection });

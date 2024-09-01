@@ -41,7 +41,8 @@ public class CustomGravityObject : MonoBehaviour {
 
         //if rotation not possible, don't.
         if (gravColliderController && !gravColliderController.SetSuperParentPosition()) {
-            Debug.Log("There isn't enough space to rotate gravity here...By - " + gameObject.name);
+
+            LevelManager.Instance?.ShowErrorText();
 
             gravityDirection = oldGravityScale; //reset gravity to what we started from
             gravColliderController.ResetColliders();

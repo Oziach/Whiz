@@ -11,6 +11,7 @@ public class PlayerAnimHandler : MonoBehaviour
     const string DOWN_ATTACK_TRIGGER = "DownAttackTrigger";
     const string HORIZONTAL_ATTACK_TRIGGER = "HorizontalAttackTrigger";
     const string WAND_RECHARGING_BOOL = "Recharging";
+    const string JUMPING_BOOL = "Jumping";
     
 
     [SerializeField] Player player;
@@ -53,6 +54,7 @@ public class PlayerAnimHandler : MonoBehaviour
     {
         bodyAnimator.SetBool(RUNNING, player.IsRunning());
         feetAnimator.SetBool(RUNNING, player.IsRunning());
+        bodyAnimator.SetBool(JUMPING_BOOL, !player.IsGrounded());
         wandAnimator.SetBool(WAND_RECHARGING_BOOL, playerCasting.IsRecharging());
     }
 
