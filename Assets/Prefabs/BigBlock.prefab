@@ -87,13 +87,13 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 72
+      m_Bits: 584
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 2215634642365402124}
-  screwUnityExtentCheckMagicNumber: 0.001
+  screwUnityExtentCheckMagicNumber: 0.0025
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!114 &2215634642365402124
@@ -131,7 +131,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  skinThickness: 0.01
   bufferDistance: 0
 --- !u!1 &3996886870579840263
 GameObject:

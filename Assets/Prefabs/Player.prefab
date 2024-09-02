@@ -552,7 +552,7 @@ MonoBehaviour:
   superParentRb: {fileID: 6205848262650766582}
   layerMask:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 832
   bufferDistance: 0.1
 --- !u!1 &5034297731631619438
 GameObject:
@@ -606,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d743cae821aa7b438350e2c27b3fa6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   playerAnimHandler: {fileID: 2061679374998743186}
   playerVisual: {fileID: 7833143676565899839}
   playerDeathPrefab: {fileID: 8296496680720871679, guid: e6b105a329f4695449852ac4a7e685d0, type: 3}
@@ -639,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706697762c292db46bc85ac483aa72ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   customGravityObject: {fileID: 363944975552108998}
   SpellPrefab: {fileID: 633497581701429981, guid: 818330d265ab0bf42909d9596c545afa, type: 3}
   wandPopPrefab: {fileID: 1212566745685196575, guid: e98727c1f817d05418b7b00f24ba53d4, type: 3}
@@ -710,7 +712,7 @@ MonoBehaviour:
     useDepth: 0
     useOutsideDepth: 0
     useNormalAngle: 0
-    useOutsideNormalAngle: 1
+    useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
       m_Bits: 328
@@ -719,6 +721,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 363944975552108998}
+  screwUnityExtentCheckMagicNumber: 0.0025
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!1 &5786006998577918385
@@ -936,7 +939,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8376112, y: 0.324414}
+  m_Size: {x: 0.8376112, y: 0.3570161}
   m_EdgeRadius: 0
 --- !u!1 &7833143676565899839
 GameObject:
@@ -1096,7 +1099,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32441396, y: 0.8376112}
+  m_Size: {x: 0.35701615, y: 0.8376112}
   m_EdgeRadius: 0
 --- !u!1 &9138077753080200730
 GameObject:

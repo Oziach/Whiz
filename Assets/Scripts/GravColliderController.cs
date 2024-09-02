@@ -10,8 +10,10 @@ public class GravColliderController : MonoBehaviour
     [SerializeField] GameObject superParent;
     [SerializeField] Rigidbody2D superParentRb;
     [SerializeField] LayerMask layerMask;
-    [SerializeField] float skinThickness;
     [SerializeField] float bufferDistance;
+
+    private float skinThickness;
+
     // Start is called before the first frame update
     void Start()
     {

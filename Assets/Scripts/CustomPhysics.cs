@@ -64,9 +64,9 @@ public class CustomPhysics : MonoBehaviour {
             foreach (RaycastHit2D hit in hits) {
 
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
-               
-                if (hit.point.x - boxCollider.bounds.min.x < -screwUnityExtentCheckMagicNumber || hit.point.x - boxCollider.bounds.max.x > screwUnityExtentCheckMagicNumber) {
-                    continue; 
+
+                if (hit.point.x + screwUnityExtentCheckMagicNumber < boxCollider.bounds.min.x || hit.point.x - screwUnityExtentCheckMagicNumber > boxCollider.bounds.max.x) {
+                    continue;
                 }
 
                 numberOfOtherHits++;
@@ -138,9 +138,11 @@ public class CustomPhysics : MonoBehaviour {
             foreach (RaycastHit2D hit in hits) {
 
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
-                if(hit.point.y < boxCollider.bounds.min.y|| hit.point.y > boxCollider.bounds.max.y) { continue; }
+                if (hit.point.y + screwUnityExtentCheckMagicNumber < boxCollider.bounds.min.y || hit.point.y - screwUnityExtentCheckMagicNumber > boxCollider.bounds.max.y) {
+                    continue;
+                }
                 numberOfOtherHits++;
-
+                Debug.Log("hit point: " + hit.point.y + " :: Collider max bounds: " + boxCollider.bounds.min.y);
 
                 if (hit.distance <= 0) {
                     Debug.Log("Physics update. Me," + gameObject.name + "is resolving horizontal clipping");
