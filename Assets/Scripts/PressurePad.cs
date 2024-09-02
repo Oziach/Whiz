@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PressurePad : MonoBehaviour
 {
-    [SerializeField] ShutterSegment shutter;
     [SerializeField] GameObject pressurePadVisual;
     [SerializeField] float onePixelVal = 0.06125f;
 

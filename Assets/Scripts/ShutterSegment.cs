@@ -23,7 +23,7 @@ public class ShutterSegment : MonoBehaviour
     {
         rb = GetComponent<CustomPhysics>();
         customGravityObject = GetComponent<CustomGravityObject>();
-        customGravityObject.SetGravityDirection(Vector2.zero);
+        //customGravityObject.SetGravityDirection(Vector2.zero);
         segmentCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -77,22 +77,18 @@ public class ShutterSegment : MonoBehaviour
 
         if (opening) {
             rb.velocity = transform.up * shutterSpeed;
-            Debug.Log(rb.velocity);
 
-            if (transform.localPosition.y > finaLocalPosition.y) {
+            if (transform.localPosition.y >= finaLocalPosition.y) {
                 transform.localPosition = new Vector2(transform.localPosition.x, finaLocalPosition.y);
                 rb.velocity = Vector2.zero;
-                if (gameObject.GetComponent<ShutterSegment>()) { Debug.Log("Set to zero"); }
             }
         }
         else {
             rb.velocity = -transform.up * shutterSpeed;
-            Debug.Log(rb.velocity);
 
-            if (transform.localPosition.y < initialLocalPosition.y) {
+            if (transform.localPosition.y <= initialLocalPosition.y) {
                 transform.localPosition = new Vector2(transform.localPosition.x, initialLocalPosition.y);
                 rb.velocity = Vector2.zero;
-                if (gameObject.GetComponent<ShutterSegment>()) { Debug.Log("Set to zero"); }
 
             }
         }

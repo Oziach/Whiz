@@ -9,6 +9,7 @@ public class CustomPhysics : MonoBehaviour {
     [SerializeField] ContactFilter2D contactFilter2D;
     [SerializeField] CustomGravityObject customGravityObject;
     [SerializeField] float screwUnityExtentCheckMagicNumber = 0.0025f;
+    [SerializeField] bool immovable = false;
 
     Rigidbody2D rb; //required component
     public bool isGrounded; //exposed for debugging
@@ -59,7 +60,6 @@ public class CustomPhysics : MonoBehaviour {
 
   
             var hitRay = Physics2D.Raycast(new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), Vector2.down, 1f, contactFilter2D.layerMask);
-            Debug.Log("raycast hit distance results: " + hitRay.distance + " " + hitRay.point);
 
             foreach (RaycastHit2D hit in hits) {
 
@@ -73,6 +73,8 @@ public class CustomPhysics : MonoBehaviour {
 
 
                 if (hit.distance <= 0f) {
+                    if (immovable) { return; }
+
                     Debug.Log("Physics update. Me " + gameObject.name + " is resolving vertical clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
@@ -142,9 +144,9 @@ public class CustomPhysics : MonoBehaviour {
                     continue;
                 }
                 numberOfOtherHits++;
-                Debug.Log("hit point: " + hit.point.y + " :: Collider max bounds: " + boxCollider.bounds.min.y);
 
                 if (hit.distance <= 0) {
+                    if (immovable) { return; }
                     Debug.Log("Physics update. Me," + gameObject.name + "is resolving horizontal clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
