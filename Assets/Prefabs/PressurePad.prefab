@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48d5931b655f534f9b95772973a8f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shutter: {fileID: 0}
   pressurePadVisual: {fileID: 6861566525079977433}
+  trigger: {fileID: 6118304267547063387}
+  triggerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8456
   onePixelVal: 0.06125
 --- !u!61 &6118304267547063387
 BoxCollider2D:

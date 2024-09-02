@@ -1,23 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PressurePad : MonoBehaviour
 {
     [SerializeField] GameObject pressurePadVisual;
+    [SerializeField] BoxCollider2D trigger;
+    [SerializeField] LayerMask triggerLayerMask;
     [SerializeField] float onePixelVal = 0.06125f;
 
     private Vector2 originalPosition;
     private Vector2 finalPosition;
 
     private bool pressed = false;
-
-    private void OnTriggerStay2D(Collider2D other) {
-        CustomPhysics otherRb = other.transform.root.GetComponent<CustomPhysics>();
-        if (!otherRb || !otherRb.IsGrounded()) { return; }
-
-        pressed = true;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +23,17 @@ public class PressurePad : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        pressed = false;
+        var collision = Physics2D.OverlapBox(trigger.bounds.center, trigger.bounds.size, 0f, triggerLayerMask);
+
+        if (collision){
+            CustomGravityObject cgo = collision.transform.root.GetComponent<CustomGravityObject>();
+            if (cgo && cgo.GetGravityDirection() == -(Vector2)transform.up) {
+                pressed = true;
+            }
+        }
+        else {
+            pressed = false;
+        }
     }
     // Update is called once per frame
     void Update()
