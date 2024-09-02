@@ -65,12 +65,19 @@ public class CustomPhysics : MonoBehaviour {
 
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
 
-                if (hit.point.x + screwUnityExtentCheckMagicNumber < boxCollider.bounds.min.x || hit.point.x - screwUnityExtentCheckMagicNumber > boxCollider.bounds.max.x) {
+                Vector2 minBounds = finalPosition - (Vector2)boxCollider.bounds.size / 2;
+                Vector2 maxBounds = finalPosition + (Vector2)boxCollider.bounds.size / 2;
+
+                if (hit.point.x + screwUnityExtentCheckMagicNumber < minBounds.x || hit.point.x - screwUnityExtentCheckMagicNumber > maxBounds.x) {
+                   // Debug.Log("My data: " + gameObject.name + "My  min and max x points:" + boxCollider.bounds.min.x + " " + boxCollider.bounds.max.x + "Other collider's data - name" +
+                     //   hit.collider.gameObject.name + " HITpoint x: " +
+                      // hit.point.x);
                     continue;
                 }
 
                 numberOfOtherHits++;
 
+                //Debug.Log("Hit point: " + hit.point.x + " Min bound: " + boxCollider.bounds.min.x);
 
                 if (hit.distance <= 0f) {
                     if (immovable) { return; }
@@ -139,8 +146,11 @@ public class CustomPhysics : MonoBehaviour {
             //ahhh i see the problem. you'll have to recheck after fixing for every single hit. my god.
             foreach (RaycastHit2D hit in hits) {
 
+
+                Vector2 minBounds = finalPosition - (Vector2)boxCollider.bounds.size / 2;
+                Vector2 maxBounds = finalPosition + (Vector2)boxCollider.bounds.size / 2;
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
-                if (hit.point.y + screwUnityExtentCheckMagicNumber < boxCollider.bounds.min.y || hit.point.y - screwUnityExtentCheckMagicNumber > boxCollider.bounds.max.y) {
+                if (hit.point.y + screwUnityExtentCheckMagicNumber < minBounds.y || hit.point.y - screwUnityExtentCheckMagicNumber > maxBounds.y) {
                     continue;
                 }
                 numberOfOtherHits++;

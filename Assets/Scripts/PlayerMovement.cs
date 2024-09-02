@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         float speedMul = rb.IsGrounded() ? 1 : airResistanceSpeedMultiplier;
         float currSpeed = speedMul * moveSpeed;
 
+        Debug.Log(movementVector);
+
         if (gravityDir == Vector2.down || gravityDir == Vector2.up) {
 
             rb.velocity = new Vector2(movementVector.x * currSpeed, rb.velocity.y);
