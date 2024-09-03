@@ -7107,7 +7107,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 371040278}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &371040280
@@ -14322,7 +14325,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 814810746}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &814810748
@@ -15678,7 +15684,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 1068972336}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &1068972338
@@ -17082,7 +17091,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 1225504242}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &1225504244
@@ -17839,7 +17851,7 @@ GameObject:
   - component: {fileID: 1294087904}
   m_Layer: 6
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21961,7 +21973,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 1662579903}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &1662579905
@@ -23821,7 +23836,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 2066486807}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
   immovable: 1
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &2066486809

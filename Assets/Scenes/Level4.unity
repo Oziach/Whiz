@@ -17682,7 +17682,7 @@ GameObject:
   - component: {fileID: 1294087904}
   m_Layer: 6
   m_Name: Foreground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23883,6 +23883,14 @@ PrefabInstance:
     - target: {fileID: 2357552082061004632, guid: d8c1a597482997d409bb9808d789afec, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905109000673328526, guid: d8c1a597482997d409bb9808d789afec, type: 3}
+      propertyPath: m_Size.x
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3905109000673328526, guid: d8c1a597482997d409bb9808d789afec, type: 3}
+      propertyPath: m_Size.y
+      value: 0.98
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

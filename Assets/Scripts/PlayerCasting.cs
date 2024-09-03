@@ -101,7 +101,7 @@ public class PlayerCasting : MonoBehaviour
 
     private void Gravcast() {
 
-        if (!rb.IsGrounded()) { return;  }
+        if (rb && !rb.IsGrounded()) { return;  }
 
         Vector2 newGravityDirection = RotationToDirection();
         customGravityObject.SetGravityDirection(newGravityDirection);

@@ -94,7 +94,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 2215634642365402124}
   screwUnityExtentCheckMagicNumber: 0.001
+  stepHeight: 0.01
   immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!114 &2215634642365402124
@@ -208,7 +211,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.985, y: 0.985}
+  m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
 --- !u!1 &7637321883304090582
 GameObject:

@@ -23,12 +23,12 @@ public class ShutterSegment : MonoBehaviour
     {
         rb = GetComponent<CustomPhysics>();
         customGravityObject = GetComponent<CustomGravityObject>();
-        //customGravityObject.SetGravityDirection(Vector2.zero);
+        customGravityObject.SetGravityDirection(Vector2.zero);
         segmentCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         initialLocalPosition = transform.localPosition;
-        finaLocalPosition = transform.up;
+        finaLocalPosition = Vector2.up;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
