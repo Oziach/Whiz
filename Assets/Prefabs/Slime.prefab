@@ -96,6 +96,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 631224130179808761}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!114 &631224130179808761
@@ -165,8 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slime: {fileID: 6275315938092184566}
-  groundBufferDistance: 0.05
-  moveBufferDistance: 0.05
+  groundBufferDistance: 0.33
+  moveBufferDistance: 0.2
   mainCollider: {fileID: 3903140539449343287}
   rb: {fileID: 5994726092868764791}
   customGravityObject: {fileID: 631224130179808761}
@@ -428,7 +433,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 357431815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b93d8945ee88a7149ba372bd35bd54e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -589,7 +594,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 357431815
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 79a192f848a8f6540b51b315f3e80331, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

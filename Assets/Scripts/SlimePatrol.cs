@@ -54,15 +54,23 @@ public class SlimePatrol : MonoBehaviour
 
                 //else, perform a second boxcast to check we onl move if we remain grounded
   
-                Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
-                
-                boxcastOrigin.x += movement.x + Mathf.Sign(movement.x) * (moveBufferDistance + mainCollider.bounds.size.x);
-                boxcastDirection = gravityDirection;
-                boxcastDistance = skinThickness + groundBufferDistance;
-                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
-                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
-                if (!hit2) { canMoveInVelDir = false; }
-                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.x)); }
+                Debug.DrawRay(raycastOrigin, raycastDirection * raycastDistance, Color.red);
+                bool checkedForSmallGaps = false;
+                while (true) {
+
+                    if (checkedForSmallGaps) { raycastOrigin.x += movementSign * moveBufferDistance; }
+
+                    //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                    RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+                    if (!hit2) { canMoveInVelDir = false;}
+                    else { canMoveInVelDir = true; }
+
+                    if (checkedForSmallGaps) { break; } else { checkedForSmallGaps = true; }
+
+
+                }
+
 
 
             }
@@ -95,15 +103,23 @@ public class SlimePatrol : MonoBehaviour
 
                 Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
-                //else, perform a second boxcast to check we onl move if we remain grounded
-                boxcastOrigin.x -= movement.x + (Mathf.Sign(movement.x) * (moveBufferDistance+ mainCollider.bounds.size.x));
-                boxcastDirection = gravityDirection;
-                boxcastDistance = skinThickness + groundBufferDistance;
-                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
-                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
-                if (!hit2) { canMoveAgainstVelDir = false; }
-                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.x)); }
+                //else, perform a second boxcast to check we onl move if we remain grounded
+
+                bool checkedForSmallGaps = false;
+                while (true) {
+
+                    if (checkedForSmallGaps) { raycastOrigin.x += movementSign * moveBufferDistance; }
+                    //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                    RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+                    if (!hit2) { canMoveAgainstVelDir = false; }
+                    else { canMoveAgainstVelDir = true; }
+
+                    if (checkedForSmallGaps) { break; } else { checkedForSmallGaps = true; }
+
+
+                }
             }
 
             if (canMoveAgainstVelDir) { rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y); }
@@ -135,21 +151,28 @@ public class SlimePatrol : MonoBehaviour
                 Vector2 raycastDirection = gravityDirection;
                 float raycastDistance = skinThickness + groundBufferDistance;
 
-                Debug.DrawRay(raycastOrigin, gravityDirection, Color.red);
+                Debug.DrawRay(raycastOrigin, gravityDirection * raycastDistance, Color.red);
 
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
 
                 //else, perform a second boxcast to check we onl move if we remain grounded
-                boxcastOrigin.y += movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
-                boxcastDirection = gravityDirection;
-                boxcastDistance = skinThickness + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
-                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                bool checkedForSmallGaps = false;
+                while (true) {
 
-                if (!hit2) { canMoveInVelDir = false; }
-                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.y)); }
+                    if (checkedForSmallGaps) { raycastOrigin.y += movementSign * moveBufferDistance; }
 
+                    //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                    RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+
+                    if (!hit2) { canMoveInVelDir = false; }
+                    else { canMoveInVelDir = true; }
+
+                    if (checkedForSmallGaps) { break; } else { checkedForSmallGaps = true; }
+
+
+                }
             }
 
             if (canMoveInVelDir) { return; }
@@ -178,17 +201,24 @@ public class SlimePatrol : MonoBehaviour
 
                 Debug.Log("Can move in direction no wall: " + boxcastDirection);
 
-                //else, perform a second boxcast to check we onl move if we remain grounded
-                boxcastOrigin.y = movement.y + (Mathf.Sign(movement.y) * (moveBufferDistance + mainCollider.bounds.size.y));
-                boxcastDirection = gravityDirection;
-                boxcastDistance = skinThickness + groundBufferDistance;
-                RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
 
-                //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                bool checkedForSmallGaps = false;
+                while (true) {
 
-                if (!hit2) { canMoveAgainstVelDir = false; }
-                else { Debug.Log("have floor in direction: " + Mathf.Sign(movement.y)); }
+                    if (checkedForSmallGaps) { raycastOrigin.y += movementSign * moveBufferDistance; }
 
+                    //RaycastHit2D hit2 = Physics2D.BoxCast(boxcastOrigin, boxSize, 0f, boxcastDirection, boxcastDistance, groundMask);
+                    RaycastHit2D hit2 = Physics2D.Raycast(raycastOrigin, raycastDirection, raycastDistance, groundMask);
+
+
+                    if (!hit2) { canMoveAgainstVelDir = false; }
+
+                    else { canMoveAgainstVelDir = true; }
+
+                    if (checkedForSmallGaps) { break; } else { checkedForSmallGaps = true; }
+
+
+                }
             }
 
             if (canMoveAgainstVelDir) { rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y); }

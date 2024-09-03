@@ -28,7 +28,9 @@ public class Fader : MonoBehaviour
 
         timeLeft -= Time.deltaTime;
         Color currColor = spriteRenderer.color;
-        float alpha = initialAlpha * timeLeft / fadeTime;
+
+        float alpha = timeLeft / fadeTime;
+
         if (reverse) { alpha = 1 - alpha; }
         spriteRenderer.color = new Color(currColor.r, currColor.g, currColor.b, alpha);
     }
