@@ -87,13 +87,14 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 584
+      m_Bits: 8776
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 2215634642365402124}
-  screwUnityExtentCheckMagicNumber: 0.0025
+  screwUnityExtentCheckMagicNumber: 0.001
+  immovable: 0
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!114 &2215634642365402124
@@ -207,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.98}
+  m_Size: {x: 0.985, y: 0.985}
   m_EdgeRadius: 0
 --- !u!1 &7637321883304090582
 GameObject:

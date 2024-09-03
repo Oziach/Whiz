@@ -8,11 +8,12 @@ public class CustomPhysics : MonoBehaviour {
     [SerializeField] BoxCollider2D[] boxColliders;
     [SerializeField] ContactFilter2D contactFilter2D;
     [SerializeField] CustomGravityObject customGravityObject;
-
+    [SerializeField] float screwUnityExtentCheckMagicNumber = 0.0025f;
+    [SerializeField] bool immovable = false;
 
     Rigidbody2D rb; //required component
     public bool isGrounded; //exposed for debugging
-    [SerializeField] private float skinThickness = 0.01f;
+    private float skinThickness;
 
     public Vector2 velocity;
 
@@ -24,13 +25,15 @@ public class CustomPhysics : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+
         Vector2 movement = velocity * Time.fixedDeltaTime;
         isGrounded = false;
 
         Vector2 finalPosition = rb.position;
 
-        VerticalMovemement(movement, ref finalPosition);
         HorizontalMovemement(movement, ref finalPosition);
+        VerticalMovemement(movement, ref finalPosition);
+
         rb.MovePosition(finalPosition);//
 
 
@@ -56,12 +59,29 @@ public class CustomPhysics : MonoBehaviour {
             int numberOfOtherHits = 0; //if only self hit, then this will remain zero
 
 
+            var hitRay = Physics2D.Raycast(new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), Vector2.down, 1f, contactFilter2D.layerMask);
+
             foreach (RaycastHit2D hit in hits) {
 
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
+
+                Vector2 minBounds = finalPosition - (Vector2)boxCollider.bounds.size / 2;
+                Vector2 maxBounds = finalPosition + (Vector2)boxCollider.bounds.size / 2;
+
+                if (hit.point.x + screwUnityExtentCheckMagicNumber < minBounds.x || hit.point.x - screwUnityExtentCheckMagicNumber > maxBounds.x) {
+                    // Debug.Log("My data: " + gameObject.name + "My  min and max x points:" + boxCollider.bounds.min.x + " " + boxCollider.bounds.max.x + "Other collider's data - name" +
+                    //   hit.collider.gameObject.name + " HITpoint x: " +
+                    // hit.point.x);
+                    continue;
+                }
+
                 numberOfOtherHits++;
 
+                //Debug.Log("Hit point: " + hit.point.x + " Min bound: " + boxCollider.bounds.min.x);
+
                 if (hit.distance <= 0f) {
+                    if (immovable) { return; }
+
                     Debug.Log("Physics update. Me " + gameObject.name + " is resolving vertical clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
@@ -74,11 +94,14 @@ public class CustomPhysics : MonoBehaviour {
 
                     transform.position = finalPosition; //if clipping, directly move. don't interpolate using rb.move
                     rb.position = finalPosition;
-                    continue;
+
+                    break;
                 }
+
 
                 finalPosition.y = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.y)))).y;
                 velocity = new Vector2(velocity.x, customGravityObject.GetGravityDirection().y); //have unit velocity in gravity direction to prevent clipping issues at tiny units
+                //Debug.DrawRay(new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), hit.point - new Vector2(finalPosition.x, finalPosition.y - boxCollider.bounds.size.y / 2), Color.white);
 
                 //set grounded
                 if (customGravityObject.GetGravityDirection().y == Mathf.Sign(movement.y)) { isGrounded = true; }
@@ -91,6 +114,7 @@ public class CustomPhysics : MonoBehaviour {
 
             if (numberOfOtherHits == 0) {
                 finalPosition = new Vector2(finalPosition.x, rb.position.y + movement.y);
+
             }
 
         }
@@ -117,13 +141,22 @@ public class CustomPhysics : MonoBehaviour {
 
             //Debug.Log(numberOfHits);
 
+
+
             //ahhh i see the problem. you'll have to recheck after fixing for every single hit. my god.
             foreach (RaycastHit2D hit in hits) {
 
+
+                Vector2 minBounds = finalPosition - (Vector2)boxCollider.bounds.size / 2;
+                Vector2 maxBounds = finalPosition + (Vector2)boxCollider.bounds.size / 2;
                 if (hit.collider.gameObject == boxCollider.gameObject) { continue; }
+                if (hit.point.y + screwUnityExtentCheckMagicNumber < minBounds.y || hit.point.y - screwUnityExtentCheckMagicNumber > maxBounds.y) {
+                    continue;
+                }
                 numberOfOtherHits++;
 
                 if (hit.distance <= 0) {
+                    if (immovable) { return; }
                     Debug.Log("Physics update. Me," + gameObject.name + "is resolving horizontal clipping");
 
                     if (Mathf.Abs(hit.normal.x) > 0.99f && Mathf.Abs(hit.normal.y) < 0.01f) {
@@ -135,7 +168,7 @@ public class CustomPhysics : MonoBehaviour {
 
                     transform.position = finalPosition;  //if clipping, directly move. don't interpolate using rb.move
                     rb.position = finalPosition;
-                    continue;
+                    break;
                 }
 
                 finalPosition.x = (hit.point + (-boxcastDirection * (skinThickness + (boxCollider.bounds.extents.x)))).x;
@@ -169,7 +202,7 @@ public class CustomPhysics : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
+        skinThickness = Physics2D.defaultContactOffset;
     }
 
     // Update is called once per frame
@@ -177,4 +210,4 @@ public class CustomPhysics : MonoBehaviour {
     }
 
 }
-*/
+*//**/
