@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     bool inputNullPrevFrame = false;
     private void Awake() {
+
         if (Instance) {
             Destroy(gameObject);
         }
@@ -23,13 +24,17 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        if (SaveLoadSystem.HasHighestLevel()) {
+            highestLevelReached = SaveLoadSystem.LoadHighestLevelReached();
+        }
+
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
 
@@ -61,10 +66,15 @@ public class GameManager : MonoBehaviour
 
     //getters and setters
     public void SetHighestLevelReached(int level) {
+
+        int prevHighestLevelReached = highestLevelReached;
+
         highestLevelReached = Mathf.Max(level, highestLevelReached);
         highestLevelReached = Mathf.Min(highestLevelReached, highestPossibleLevel);
-        Debug.Log("Hgihest level set to : " + highestLevelReached);
 
+        if (highestLevelReached > prevHighestLevelReached) {
+            SaveLoadSystem.SaveHighestLevelReached(highestLevelReached);
+        }
     }
 
     public int GetHighestLevelReached() {

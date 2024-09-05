@@ -22,9 +22,16 @@ public class LevelManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Start() {
+        SaveHighestLevelReached();
+    }
+
+    private static void SaveHighestLevelReached() {
+        if (GameManager.Instance) {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            int currentLevel = currentSceneIndex - GameManager.Instance.GetLevel1Index() + 1;
+            GameManager.Instance.SetHighestLevelReached(currentLevel);
+        }
     }
 
 

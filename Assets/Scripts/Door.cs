@@ -11,12 +11,6 @@ public class Door : MonoBehaviour
 
         if (locked){ return; }
 
-        if (GameManager.Instance) {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            int currentLevel = currentSceneIndex - GameManager.Instance.GetLevel1Index() + 1;
-            GameManager.Instance.SetHighestLevelReached(currentLevel+1);
-        }
-
         LevelManager.Instance.LoadNextScene();
     } 
         
