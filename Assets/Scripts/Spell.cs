@@ -37,10 +37,14 @@ public class Spell : MonoBehaviour
         Debug.Log("Spell collided with: " + other.gameObject.name);
         Destroy(gameObject);
 
+        //spell fizzle visuals
         Instantiate(spellFizzle, fizzleCenter.position, Quaternion.identity, null);
 
         GameObject instantiatedVisual = Instantiate(gravityChangedVFX, other.transform.position, Quaternion.identity, other.transform);
         instantiatedVisual.transform.right = gravDirection;
+
+        //spell fizzle audio
+        SoundManager.Instance?.PlaySpellImpactSound();
     }
 
 

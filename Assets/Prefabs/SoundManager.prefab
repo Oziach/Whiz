@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1074953246486022720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 783464721807009363}
+  - component: {fileID: 2550376527600401942}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &783464721807009363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074953246486022720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2550376527600401942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074953246486022720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05649bbde8e9a7f48bd8b4e9ab7e9f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravcastSound: {fileID: 8300000, guid: 3ed697101a5448744be833e528d33c8f, type: 3}
+  spellcastSound: {fileID: 8300000, guid: d0fe477e4225cc845bac2ab21da05f82, type: 3}
+  playerDeathSound: {fileID: 8300000, guid: feeba455dbdd1a64eb6847509a6d5240, type: 3}
+  slimeDeathSound: {fileID: 8300000, guid: 569af88b81f835e4ea9e62a5695aaade, type: 3}
+  spellImpactSound: {fileID: 8300000, guid: 2bb3819f9d3604245b284be68a674c99, type: 3}
+  shutterOpenSound: {fileID: 8300000, guid: 6c3751da7c0728c4790bc775a18ee441, type: 3}
+  shutterCloseSound: {fileID: 8300000, guid: 66a3ae49864185347adbc8ef96b6ace5, type: 3}
+  gravcastVolume: 1
+  spellcastVolume: 1
+  playerDeathSoundVolume: 1
+  slimeDeathSoundVolume: 0.2
+  spellImpactSoundVolume: 0.2
+  shutterOpenVolume: 0.5
+  shutterCloseVolume: 0.5

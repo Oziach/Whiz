@@ -12,7 +12,8 @@ public class PlayerAnimHandler : MonoBehaviour
     const string HORIZONTAL_ATTACK_TRIGGER = "HorizontalAttackTrigger";
     const string WAND_RECHARGING_BOOL = "Recharging";
     const string JUMPING_BOOL = "Jumping";
-    
+    const string HEAD_LOOK_DIRECTION_INT = "HeadLookDirection";
+
 
     [SerializeField] Player player;
     [SerializeField] PlayerCasting playerCasting;
@@ -20,6 +21,7 @@ public class PlayerAnimHandler : MonoBehaviour
     [SerializeField] Animator feetAnimator;
     [SerializeField] Animator handsAnimator;
     [SerializeField] Animator wandAnimator;
+    [SerializeField] Animator headAnimator;
 
     [SerializeField] GameObject gravcastDirectionArrowPrefab;
     [SerializeField] GameObject gravcastDirectionArrowOrigin;
@@ -31,11 +33,16 @@ public class PlayerAnimHandler : MonoBehaviour
     void Start()
     {
         playerCasting.OnSpellCasted += PlayerCasting_OnSpellCasted;
+        playerCasting.OnGravcast += PlayerCasting_OnGravcast;
 
     }
 
+    private void PlayerCasting_OnGravcast(object sender, PlayerCasting.SpellcastEventArgs e) {
+        SoundManager.Instance?.PlayGravcastSound();
+    }
 
     private void PlayerCasting_OnSpellCasted(object sender, PlayerCasting.SpellcastEventArgs e) {
+        SoundManager.Instance?.PlaySpellcastSound();
         HandsAttackAnimation(e);
     }
 
@@ -47,7 +54,9 @@ public class PlayerAnimHandler : MonoBehaviour
         else { handsAnimator.SetTrigger(HORIZONTAL_ATTACK_TRIGGER); }
     }
 
-
+    private void HeadLookDirection() {
+        headAnimator.SetFloat(HEAD_LOOK_DIRECTION_INT, playerCasting.GetLookDirection());
+    }
 
     // Update is called once per frame
     void Update()
@@ -56,6 +65,7 @@ public class PlayerAnimHandler : MonoBehaviour
         feetAnimator.SetBool(RUNNING, player.IsRunning());
         bodyAnimator.SetBool(JUMPING_BOOL, !player.IsGrounded());
         wandAnimator.SetBool(WAND_RECHARGING_BOOL, playerCasting.IsRecharging());
+        HeadLookDirection();
     }
 
     private void OnDestroy() {

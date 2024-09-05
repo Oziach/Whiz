@@ -13,15 +13,24 @@ public class GameInput : MonoBehaviour
 
     public event EventHandler OnGravcastPerformed;
     public event EventHandler<RotateGravityEventArgs> OnRotateGravityPerformed;
+
     public event EventHandler OnSpellcastPerformed;
-    
+
+
     private PlayerInputActions playerInputActions;
 
     [SerializeField] float actionInputDelay = 0.025f;
 
 
     private void Awake() {
-        Instance = this;
+
+        if (Instance) { 
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
+
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
 
@@ -34,6 +43,14 @@ public class GameInput : MonoBehaviour
 
         playerInputActions.DefaultMap.Spellcast.performed += Spellcast_Performed;
 
+        playerInputActions.DefaultMap.Escape.performed += Escape_Performed;
+
+    }
+
+    private void Escape_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        if (GameManager.Instance) {
+            GameManager.Instance.LoadMainMenu();
+        }
     }
 
     private void Spellcast_Performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
@@ -94,6 +111,8 @@ public class GameInput : MonoBehaviour
     }
 
     private void OnDestroy() {
+
+        //unsubscribe all input events
         playerInputActions.DefaultMap.Gravcast.performed -= Gravcast_Performed;
 
         playerInputActions.DefaultMap.RotateGravityRight.performed -= RotateGravityRight_Performed;
@@ -102,6 +121,8 @@ public class GameInput : MonoBehaviour
         playerInputActions.DefaultMap.RotateGravityDown.performed -= RotateGravityDown_Performed;
 
         playerInputActions.DefaultMap.Spellcast.performed -= Spellcast_Performed;
+
+        playerInputActions.DefaultMap.Escape.performed -= Escape_Performed;
     }
 
 }

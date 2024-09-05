@@ -22,5 +22,6 @@ public class IntroCutscene : MonoBehaviour
         if (!GameInput.Instance) { return; }
         GameInput.Instance.OnSpellcastPerformed -= Instance_OnGravcastPerformed;
 
+
     }
 }

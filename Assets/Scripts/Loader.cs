@@ -20,6 +20,7 @@ public class Loader : MonoBehaviour
 
 
     public void LoadLatestLevel() {
+
         GameManager.Instance.LoadLatestLevel();
     }
 }

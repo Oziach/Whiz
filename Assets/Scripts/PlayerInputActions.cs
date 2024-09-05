@@ -89,6 +89,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ad56630-6436-4b38-bcc9-79027648a446"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""RotateGravityDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad59fb6b-c0a1-4872-81ce-456809c86f4b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -255,6 +275,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_DefaultMap_RotateGravityLeft = m_DefaultMap.FindAction("RotateGravityLeft", throwIfNotFound: true);
         m_DefaultMap_RotateGravityUp = m_DefaultMap.FindAction("RotateGravityUp", throwIfNotFound: true);
         m_DefaultMap_RotateGravityDown = m_DefaultMap.FindAction("RotateGravityDown", throwIfNotFound: true);
+        m_DefaultMap_Escape = m_DefaultMap.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -323,6 +344,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_DefaultMap_RotateGravityLeft;
     private readonly InputAction m_DefaultMap_RotateGravityUp;
     private readonly InputAction m_DefaultMap_RotateGravityDown;
+    private readonly InputAction m_DefaultMap_Escape;
     public struct DefaultMapActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -334,6 +356,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @RotateGravityLeft => m_Wrapper.m_DefaultMap_RotateGravityLeft;
         public InputAction @RotateGravityUp => m_Wrapper.m_DefaultMap_RotateGravityUp;
         public InputAction @RotateGravityDown => m_Wrapper.m_DefaultMap_RotateGravityDown;
+        public InputAction @Escape => m_Wrapper.m_DefaultMap_Escape;
         public InputActionMap Get() { return m_Wrapper.m_DefaultMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -364,6 +387,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @RotateGravityDown.started += instance.OnRotateGravityDown;
             @RotateGravityDown.performed += instance.OnRotateGravityDown;
             @RotateGravityDown.canceled += instance.OnRotateGravityDown;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IDefaultMapActions instance)
@@ -389,6 +415,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @RotateGravityDown.started -= instance.OnRotateGravityDown;
             @RotateGravityDown.performed -= instance.OnRotateGravityDown;
             @RotateGravityDown.canceled -= instance.OnRotateGravityDown;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IDefaultMapActions instance)
@@ -424,5 +453,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnRotateGravityLeft(InputAction.CallbackContext context);
         void OnRotateGravityUp(InputAction.CallbackContext context);
         void OnRotateGravityDown(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

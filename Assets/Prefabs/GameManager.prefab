@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level1Index: 3
-  highestPossibleLevel: 1
+  highestPossibleLevel: 10

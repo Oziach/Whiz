@@ -28,10 +28,18 @@ public class PressurePad : MonoBehaviour
         if (collision){
             CustomGravityObject cgo = collision.transform.root.GetComponent<CustomGravityObject>();
             if (cgo && cgo.GetGravityDirection() == -(Vector2)transform.up) {
+                if(pressed == false) {
+                    if (SoundManager.Instance) { SoundManager.Instance.PlayShutterOpenSound(); }
+                }
                 pressed = true;
+
             }
+
         }
         else {
+            if(pressed == true) {
+                if (SoundManager.Instance) { SoundManager.Instance.PlayShutterCloseSound(); }
+                }
             pressed = false;
         }
     }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 
@@ -62,7 +61,7 @@ public class PlayerCasting : MonoBehaviour
         Vector2 spellcastPosition = spellcastOrigin.position;
 
         if (currentGravity.x == 0) { //vertical gravity
-            spellcastDirection = inputVector.y == 0 ? Vector2.right * playerVisual.localScale.x : Vector2.up * Mathf.Sign(inputVector.y); //i should've made a GetLookDirection() method.
+            spellcastDirection = inputVector.y == 0 ? Vector2.right * playerVisual.localScale.x : Vector2.up * Mathf.Sign(inputVector.y); //i should've made a GetLookDirection() method. //its me from weeks later. I really should have.
             spellcastPosition = spellcastDirection.x == 0 ? (Vector2)spellcastOrigin.position + (spellcastDirection * spellcastOffset) : spellcastOrigin.position;
         }
         else { //horizontal gravity
@@ -92,7 +91,10 @@ public class PlayerCasting : MonoBehaviour
 
     private void RotateGravity(int gravityIndex) {
         currentGravityRotation = gravityIndex;
-        GameplayUI.Instance.SetGravityArrowDirection(RotationToDirection());
+
+        if (GameplayUI.Instance) {
+            GameplayUI.Instance.SetGravityArrowDirection(RotationToDirection());
+        }
     }
 
     private void GameInput_OnGravcastPerformed(object sender, System.EventArgs e) {
@@ -151,6 +153,32 @@ public class PlayerCasting : MonoBehaviour
     }
 
     
+    public float GetLookDirection() {
+
+        Vector2 lookDir; 
+        Vector2 currentGravity = customGravityObject.GetGravityDirection();
+        Vector2 inputVector = GameInput.Instance ? GameInput.Instance.GetMovementVector() : Vector2.zero;
+
+        if (currentGravity.x == 0) { //vertical gravity
+            lookDir = inputVector.y == 0 ? Vector2.right * playerVisual.localScale.x : Vector2.up * Mathf.Sign(inputVector.y); 
+            if(currentGravity == Vector2.down) {
+                return inputVector.y;
+            }
+            else {
+                return -inputVector.y;
+            }
+        }
+        else { //horizontal gravity
+             if(currentGravity == Vector2.right) {
+                   return -inputVector.x;
+             }
+            
+            else {
+                return inputVector.x;
+            }
+        }
+
+    }
     public bool IsRecharging() {
         return recharging;
     }

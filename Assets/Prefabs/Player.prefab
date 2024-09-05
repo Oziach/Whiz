@@ -171,6 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3768904894517145901}
   - component: {fileID: 2196232962892607376}
+  - component: {fileID: 287013113947036694}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -245,6 +246,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &287013113947036694
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710517857786305621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4a982967ec4bffe4da7569a37881bf66, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1347015763278456639
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +744,10 @@ MonoBehaviour:
     maxNormalAngle: 0
   customGravityObject: {fileID: 363944975552108998}
   screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!1 &5786006998577918385
@@ -1008,6 +1034,7 @@ MonoBehaviour:
   feetAnimator: {fileID: 4557628870823088734}
   handsAnimator: {fileID: 9126912457585832823}
   wandAnimator: {fileID: 7645094561897301100}
+  headAnimator: {fileID: 287013113947036694}
   gravcastDirectionArrowPrefab: {fileID: 917244954648035266, guid: e442667a86707a64aa5340570ed0676a, type: 3}
   gravcastDirectionArrowOrigin: {fileID: 3926459675920052072}
 --- !u!114 &7090145161565674550

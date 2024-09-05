@@ -8,12 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance {  get; private set; }
 
     [SerializeField] int level1Index = 3;
-    [SerializeField] int highestPossibleLevel = 1;
+    [SerializeField] int highestPossibleLevel = 10;
     private int highestLevelReached = 1;
 
     private const int MAIN_MENU_INDEX = 1;
     private const int LEVEL_SELECT_INDEX = 2;
 
+    bool inputNullPrevFrame = false;
     private void Awake() {
         if (Instance) {
             Destroy(gameObject);
@@ -28,13 +29,14 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void LoadLatestLevel() {
@@ -59,11 +61,18 @@ public class GameManager : MonoBehaviour
 
     //getters and setters
     public void SetHighestLevelReached(int level) {
-        highestLevelReached = Mathf.Min(level, highestLevelReached);
+        highestLevelReached = Mathf.Max(level, highestLevelReached);
         highestLevelReached = Mathf.Min(highestLevelReached, highestPossibleLevel);
+        Debug.Log("Hgihest level set to : " + highestLevelReached);
+
     }
 
     public int GetHighestLevelReached() {
         return highestLevelReached;
+    }
+
+
+    public int GetLevel1Index() {
+        return level1Index;
     }
 }

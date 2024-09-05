@@ -37,10 +37,16 @@ public class Slime : MonoBehaviour
     }
 
     private void Die() {
+        
+        //death visuals
         GameObject instantiated = Instantiate(slimeDeathPrefab, transform.position, Quaternion.identity, null);
         instantiated.transform.position = slimeVisual.transform.position;
         instantiated.transform.localScale = slimeVisual.transform.localScale;
         instantiated.transform.rotation = slimeVisual.transform.rotation;
+
+        //death sound
+        SoundManager.Instance?.PlaySlimeDeathSound();
+
         Destroy(gameObject);
     }
 
