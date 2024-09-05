@@ -7,7 +7,7 @@ public class MusicManager : MonoBehaviour
 
     private AudioSource audioSource;
 
-    private float musicVolume = 1f;
+    private float musicVolume = 0.5f;
     private float originalVolume;
     private int muteVol = 1;
 
@@ -30,7 +30,11 @@ public class MusicManager : MonoBehaviour
     }
 
     private void Start() {
-        audioSource.volume = musicVolume * originalVolume;
+
+        if (SaveLoadSystem.HasMusicVolume()) { musicVolume = SaveLoadSystem.LoadMusicVolume(); }
+        
+        audioSource.volume = musicVolume * originalVolume * muteVol;
+
         audioSource.Play();
     }
 
@@ -54,6 +58,6 @@ public class MusicManager : MonoBehaviour
 
     public void SetVolume(float vol) { 
         musicVolume = vol;
-        audioSource.volume = musicVolume;
+        audioSource.volume = musicVolume * originalVolume * muteVol;
     }
 }

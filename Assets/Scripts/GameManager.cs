@@ -81,7 +81,9 @@ public class GameManager : MonoBehaviour
         return highestLevelReached;
     }
 
-
+    public int GetHighestPossibleLevel() {
+        return highestPossibleLevel;
+    }
     public int GetLevel1Index() {
         return level1Index;
     }

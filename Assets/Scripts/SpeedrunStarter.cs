@@ -7,6 +7,13 @@ public class SpeedrunStarter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(false);
+        
+        if(GameManager.Instance && GameManager.Instance.GetHighestLevelReached() >= GameManager.Instance.GetHighestPossibleLevel()) {
+            gameObject.SetActive(true);
+        }
+
+        //speedrun handler - terminate all existing speedrun stats
         if (!SpeedrunHandler.Instance) { return;  }
 
         SpeedrunHandler.Instance.StopSpeedrunning();

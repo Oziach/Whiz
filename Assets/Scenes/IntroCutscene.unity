@@ -4875,9 +4875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press [Esc] to skip
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7779a3fd1012f4f42a9d82f7bf9dd7ff, type: 2}
   m_sharedMaterial: {fileID: -6144697959051646814, guid: 7779a3fd1012f4f42a9d82f7bf9dd7ff, type: 2}

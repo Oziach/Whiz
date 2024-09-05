@@ -24586,14 +24586,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1575465549}
-    - target: {fileID: 7495762420345832974, guid: cee03049b890f984489e5bfbdb88ed74, type: 3}
-      propertyPath: m_fontColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7495762420345832974, guid: cee03049b890f984489e5bfbdb88ed74, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 255
-      objectReference: {fileID: 0}
     - target: {fileID: 8305858211383819635, guid: cee03049b890f984489e5bfbdb88ed74, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -24673,10 +24665,6 @@ PrefabInstance:
     - target: {fileID: 8305858211383819635, guid: cee03049b890f984489e5bfbdb88ed74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8421643781588325456, guid: cee03049b890f984489e5bfbdb88ed74, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
