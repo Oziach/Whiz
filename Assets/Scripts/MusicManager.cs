@@ -9,6 +9,7 @@ public class MusicManager : MonoBehaviour
 
     private float musicVolume = 1f;
     private float originalVolume;
+    private int muteVol = 1;
 
 
     public static MusicManager Instance { get; private set; }
@@ -34,13 +35,13 @@ public class MusicManager : MonoBehaviour
     }
 
     public void UnmuteMusic() {
-        musicVolume = 1;
-        audioSource.volume = musicVolume * originalVolume;
+        muteVol = 1;
+        audioSource.volume = musicVolume * originalVolume * muteVol;
     }
 
     public void MuteMusic() {
-        musicVolume = 0;
-        audioSource.volume = musicVolume * originalVolume;
+        muteVol = 0;
+        audioSource.volume = musicVolume * originalVolume * muteVol;
     }
 
     public void EnableMusic() {
@@ -49,5 +50,10 @@ public class MusicManager : MonoBehaviour
 
     public void DisableMusic() {
         audioSource.enabled = false;
+    }
+
+    public void SetVolume(float vol) { 
+        musicVolume = vol;
+        audioSource.volume = musicVolume;
     }
 }

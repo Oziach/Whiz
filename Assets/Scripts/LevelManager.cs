@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     private float timeToRestart = 0f;
 
     [SerializeField] private float defaultLevelRestartDelay = 1f;
+    [SerializeField] private GameObject hintGameOjbect;
 
     private void Awake() {
         if (Instance) {
@@ -55,5 +56,10 @@ public class LevelManager : MonoBehaviour
 
     public void ShowErrorText() {
         GameplayUI.Instance?.ShowErrorText();
+    }
+
+    public void ShowHint() {
+        if (!hintGameOjbect) { return; }
+        hintGameOjbect.SetActive(true);
     }
 }

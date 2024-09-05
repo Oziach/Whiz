@@ -397,6 +397,9 @@ MonoBehaviour:
   feetAnimator: {fileID: 7057840224282259241}
   handsAnimator: {fileID: 3317901190602328755}
   wandAnimator: {fileID: 5119285257577959339}
+  headAnimator: {fileID: 0}
+  gravcastDirectionArrowPrefab: {fileID: 0}
+  gravcastDirectionArrowOrigin: {fileID: 0}
 --- !u!114 &1280018089396293154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +585,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4849523442933630601}
   - component: {fileID: 5794995792388080617}
+  - component: {fileID: 485935809556779209}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -656,6 +660,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &485935809556779209
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513735917484135415}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4a982967ec4bffe4da7569a37881bf66, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8268153801097205948
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +699,7 @@ GameObject:
   - component: {fileID: 6840757970873477307}
   m_Layer: 3
   m_Name: PlayerInCutscene
-  m_TagString: Player
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -709,6 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d743cae821aa7b438350e2c27b3fa6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   playerAnimHandler: {fileID: 6530382622168181532}
   playerVisual: {fileID: 4743913080853075046}
   playerDeathPrefab: {fileID: 8296496680720871679, guid: e6b105a329f4695449852ac4a7e685d0, type: 3}
@@ -729,6 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  airResistanceSpeedMultiplier: 0.5
 --- !u!114 &5341016356120024828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -741,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706697762c292db46bc85ac483aa72ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   customGravityObject: {fileID: 3270485535757722101}
   SpellPrefab: {fileID: 633497581701429981, guid: 818330d265ab0bf42909d9596c545afa, type: 3}
   wandPopPrefab: {fileID: 1212566745685196575, guid: e98727c1f817d05418b7b00f24ba53d4, type: 3}
@@ -748,7 +776,6 @@ MonoBehaviour:
   wandPopOrigin: {fileID: 8815064312785504255}
   spellcastOrigin: {fileID: 8815064312785504255}
   spellcastOffset: 0.03125
-  gravityDirectionArrow: {fileID: 0}
   rechargeTime: 1
 --- !u!114 &3270485535757722101
 MonoBehaviour:
@@ -822,6 +849,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 3270485535757722101}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!95 &6840757970873477307

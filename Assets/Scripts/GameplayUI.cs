@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 public class GameplayUI : MonoBehaviour
@@ -12,6 +15,10 @@ public class GameplayUI : MonoBehaviour
 
     [SerializeField] GameObject gravityArrow;
     [SerializeField] Animator errorTextAnim;
+    [SerializeField] UnityEngine.UI.Image hintButtonImage;
+    [SerializeField] UnityEngine.UI.Button hintButtonButton;
+
+    [SerializeField] float hintButtonDisabledOpacityValue = 0.8f;
 
     private void Awake() {
         if (Instance) {
@@ -35,10 +42,23 @@ public class GameplayUI : MonoBehaviour
     }
 
     public void SetGravityArrowDirection(Vector2 dir) {
+        if (!gravityArrow) { return;  }
         gravityArrow.transform.right = dir;
     }
 
     public void ShowErrorText() {
-        errorTextAnim?.SetTrigger(SHOW_ERROR_TEXT_TRIGGER);
+        if (errorTextAnim) { errorTextAnim.SetTrigger(SHOW_ERROR_TEXT_TRIGGER); }
+    }
+
+    public void ShowHint() {
+
+        if (LevelManager.Instance) {
+            LevelManager.Instance.ShowHint();
+        }
+
+        Color imageCol = hintButtonImage.color;
+        hintButtonImage.color = new Color(imageCol.r, imageCol.g, imageCol.b, hintButtonDisabledOpacityValue);
+
+        hintButtonButton.enabled = false;
     }
 }

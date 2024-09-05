@@ -372,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -97847671
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1980266783, guid: 7ba63739e4c77ca4b8b1032d78854380, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -670,7 +670,7 @@ MonoBehaviour:
   wandPopOrigin: {fileID: 4160562412941452148}
   spellcastOrigin: {fileID: 3490844735413061511}
   spellcastOffset: 0.03125
-  rechargeTime: 0.66
+  rechargeTime: 0.75
 --- !u!114 &363944975552108998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +709,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -743,10 +743,10 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 363944975552108998}
-  screwUnityExtentCheckMagicNumber: 0.0025
+  screwUnityExtentCheckMagicNumber: 0.001
   stepHeight: 0.01
   immovable: 0
-  flushResolutionDist: 0.001
+  flushResolutionDist: 0.01
   movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}

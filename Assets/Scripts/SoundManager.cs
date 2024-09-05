@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     private float sfxVolume = 1f;
+    private int muteVol = 1;
 
     [SerializeField] AudioClip gravcastSound;
     [SerializeField] AudioClip spellcastSound;
@@ -51,44 +52,47 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlayGravcastSound() {
-        AudioSource.PlayClipAtPoint(gravcastSound, Camera.main.transform.position, sfxVolume * gravcastVolume);
+        AudioSource.PlayClipAtPoint(gravcastSound, Camera.main.transform.position, sfxVolume * muteVol * gravcastVolume);
     }
 
     public void PlayPlayerDeathSound() {
-        AudioSource.PlayClipAtPoint(playerDeathSound, Camera.main.transform.position, sfxVolume * playerDeathSoundVolume);
+        AudioSource.PlayClipAtPoint(playerDeathSound, Camera.main.transform.position, sfxVolume * muteVol * playerDeathSoundVolume);
     }
 
     public void PlaySlimeDeathSound() {
-        AudioSource.PlayClipAtPoint(slimeDeathSound, Camera.main.transform.position, sfxVolume * slimeDeathSoundVolume);
+        AudioSource.PlayClipAtPoint(slimeDeathSound, Camera.main.transform.position, sfxVolume * muteVol * slimeDeathSoundVolume);
 
     }
     public void PlaySpellcastSound() {
-        AudioSource.PlayClipAtPoint(spellcastSound, Camera.main.transform.position, sfxVolume * spellcastVolume);
+        AudioSource.PlayClipAtPoint(spellcastSound, Camera.main.transform.position, sfxVolume * muteVol * spellcastVolume);
     }
 
     public void PlaySpellImpactSound() {
-        AudioSource.PlayClipAtPoint(spellImpactSound, Camera.main.transform.position, sfxVolume * spellImpactSoundVolume);
+        AudioSource.PlayClipAtPoint(spellImpactSound, Camera.main.transform.position, sfxVolume * muteVol * spellImpactSoundVolume);
     }
 
     public void PlayShutterOpenSound() {
-        AudioSource.PlayClipAtPoint(shutterOpenSound, Camera.main.transform.position, sfxVolume * shutterOpenVolume);
+        AudioSource.PlayClipAtPoint(shutterOpenSound, Camera.main.transform.position, sfxVolume * muteVol * shutterOpenVolume);
     }
 
     public void PlayShutterCloseSound() {
-        AudioSource.PlayClipAtPoint(shutterCloseSound, Camera.main.transform.position, sfxVolume * shutterCloseVolume);
+        AudioSource.PlayClipAtPoint(shutterCloseSound, Camera.main.transform.position, sfxVolume * muteVol * shutterCloseVolume);
     }
 
 
     public bool IsMuted() {
-        return sfxVolume == 0;
+        return muteVol == 0;
     }
 
     public void EnableSFX() {
-        sfxVolume = 1;
+        muteVol = 1;
     }
 
     public void DisableSFX() { 
-        sfxVolume = 0; 
+        muteVol = 0; 
     }
 
+    public void SetVolume(float vol) {
+        sfxVolume = vol;
+    }
 }

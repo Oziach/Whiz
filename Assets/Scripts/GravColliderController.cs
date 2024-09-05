@@ -46,6 +46,10 @@ public class GravColliderController : MonoBehaviour
     }
 
     public bool SetSuperParentPosition() {
+        return SetSuperParentPositionUtil(bufferDistance) || SetSuperParentPositionUtil(0f);
+    }
+
+    public bool SetSuperParentPositionUtil(float buffer) {
 
         Vector2 newGravityDir = customGravityObject.GetGravityDirection();
 
@@ -57,7 +61,7 @@ public class GravColliderController : MonoBehaviour
             BoxCollider2D collider = verticalCollider.GetComponent<BoxCollider2D>();
             ResetColliders();
 
-            float boxcastDist = collider.bounds.size.y / 2;
+            float boxcastDist = collider.bounds.size.y / 2 + buffer;
             Vector2 boxSize = new Vector2(collider.bounds.size.x, skinThickness);
 
             //check for up/down
@@ -71,7 +75,7 @@ public class GravColliderController : MonoBehaviour
             }
 
             if (hit) {
-                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness + bufferDistance);
+                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness);
                 superParentRb.position = (newPosition);
                 superParent.transform.position = (newPosition);
             }
@@ -79,7 +83,7 @@ public class GravColliderController : MonoBehaviour
           
             
             else if (hit2) {
-                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness + bufferDistance);
+                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
             }
@@ -90,7 +94,7 @@ public class GravColliderController : MonoBehaviour
             BoxCollider2D collider = horizontalCollider.GetComponent<BoxCollider2D>();
             ResetColliders();
 
-            float boxcastDist = collider.bounds.size.x/2;
+            float boxcastDist = collider.bounds.size.x/2 + buffer;
             Vector2 boxSize = new Vector2(skinThickness, collider.bounds.size.y);
 
             //check left/right clipping
@@ -104,7 +108,7 @@ public class GravColliderController : MonoBehaviour
             }
 
             if (hit) {
-                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness + bufferDistance);
+                Vector2 newPosition = hit.point - newGravityDir * (boxcastDist + skinThickness);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
 
@@ -112,7 +116,7 @@ public class GravColliderController : MonoBehaviour
 
             
             else if (hit2) {
-                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness + bufferDistance);
+                Vector2 newPosition = hit2.point + newGravityDir * (boxcastDist + skinThickness);
                 superParent.transform.position = (newPosition);
                 superParentRb.position = newPosition;
 
