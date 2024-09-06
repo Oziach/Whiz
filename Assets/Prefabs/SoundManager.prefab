@@ -54,7 +54,7 @@ MonoBehaviour:
   gravcastVolume: 1
   spellcastVolume: 1
   playerDeathSoundVolume: 0.25
-  slimeDeathSoundVolume: 0.2
+  slimeDeathSoundVolume: 0.3
   spellImpactSoundVolume: 0.2
   shutterOpenVolume: 0.5
   shutterCloseVolume: 0.5

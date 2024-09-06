@@ -37,13 +37,15 @@ public class PlayerCasting : MonoBehaviour
 
         rechargeCountdown = rechargeTime;
 
-        if (!GameInput.Instance || !GameplayUI.Instance) { return; }
+        if (!GameInput.Instance) { return; }
 
         GameInput.Instance.OnRotateGravityPerformed += GameInput_OnRotateGravityPerformed;
         GameInput.Instance.OnGravcastPerformed += GameInput_OnGravcastPerformed;
         GameInput.Instance.OnSpellcastPerformed += GameInput_OnSpellcastPerformed;
-        GameplayUI.Instance.SetGravityArrowDirection(RotationToDirection());
         rb = GetComponent<CustomPhysics>();
+
+        if(!GameplayUI.Instance) { return; }
+        GameplayUI.Instance.SetGravityArrowDirection(RotationToDirection());
     }
 
     private void GameInput_OnSpellcastPerformed(object sender, System.EventArgs e) {

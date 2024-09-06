@@ -469,6 +469,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 479212413}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &479212415
@@ -535,7 +540,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9622642, g: 0.9385606, b: 0.8769313, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -560,7 +565,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -665,7 +670,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 5.625
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -813,6 +818,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 826838008}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &826838010
@@ -1135,6 +1145,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 998905606}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &998905608
@@ -5068,6 +5083,11 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   customGravityObject: {fileID: 1824662116}
+  screwUnityExtentCheckMagicNumber: 0.0025
+  stepHeight: 0.01
+  immovable: 0
+  flushResolutionDist: 0.001
+  movementHappenedThresholdDist: 0.0001
   isGrounded: 0
   velocity: {x: 0, y: 0}
 --- !u!50 &1824662118

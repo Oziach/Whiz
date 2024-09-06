@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void ShowErrorText() {
-        GameplayUI.Instance?.ShowErrorText();
+        if (GameplayUI.Instance) {GameplayUI.Instance.ShowErrorText(); }
     }
 
     public void ShowHint() {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -53,12 +54,14 @@ public class GameplayUI : MonoBehaviour
         float currTime = SpeedrunHandler.Instance.GetCurrSpeedrunTime();
         int mins = (int)(currTime / 60);
         int hours = (int)(currTime / 60 / 60);
-        int seconds = (int) (currTime - (hours * 60 * 60) - (mins * 60));
+        int seconds = (int)(currTime - (hours * 60 * 60) - (mins * 60));
 
         string timerText = "";
         if (hours > 0) { timerText += hours.ToString() + ":"; }
         if (mins > 0) { timerText += mins.ToString() + ":"; }
         timerText += seconds.ToString();
+
+        timerText = String.Format("{0:00}:{1:00}", mins, seconds);
 
         return timerText;
     }
