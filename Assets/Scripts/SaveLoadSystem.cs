@@ -8,6 +8,7 @@ public class SaveLoadSystem : MonoBehaviour
     static string HIGHEST_LEVEL_REACHED = "HighestLevelReached";
     static string MUSIC_VOLUME = "MusicVolume";
     static string SOUNDS_VOLUME = "SoundsVolume";
+    static string FINISHED_GAME_ONCE = "FinishedGameOnce";
 
     public static void SaveHighestLevelReached(int level) {
         PlayerPrefs.SetInt(HIGHEST_LEVEL_REACHED, level);
@@ -22,7 +23,6 @@ public class SaveLoadSystem : MonoBehaviour
     public static void SaveMusicVolume(float volume) { 
         PlayerPrefs.SetFloat(MUSIC_VOLUME, volume);
         PlayerPrefs.Save();
-
     }
     public static float LoadMusicVolume() { 
         return PlayerPrefs.GetFloat(MUSIC_VOLUME);
@@ -48,6 +48,14 @@ public class SaveLoadSystem : MonoBehaviour
 
     public static bool HasSoundsVolume() {
         return PlayerPrefs.HasKey(SOUNDS_VOLUME);
+    }
+
+    public static void SaveFinishedGameOnce() {
+        PlayerPrefs.SetInt(FINISHED_GAME_ONCE, 1);
+        PlayerPrefs.Save();
+    }
+    public static bool HasFinishedGameOnce() {
+        return PlayerPrefs.HasKey(FINISHED_GAME_ONCE);
     }
 
 

@@ -39,7 +39,7 @@ public class PressurePad : MonoBehaviour
         else {
             if(pressed == true) {
                 if (SoundManager.Instance) { SoundManager.Instance.PlayShutterCloseSound(); }
-                }
+            }
             pressed = false;
         }
     }

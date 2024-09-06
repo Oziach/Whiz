@@ -9,7 +9,7 @@ public class SpeedrunStarter : MonoBehaviour
     {
         gameObject.SetActive(false);
         
-        if(GameManager.Instance && GameManager.Instance.GetHighestLevelReached() >= GameManager.Instance.GetHighestPossibleLevel()) {
+        if(GameManager.Instance && SaveLoadSystem.HasFinishedGameOnce()) {
             gameObject.SetActive(true);
         }
 

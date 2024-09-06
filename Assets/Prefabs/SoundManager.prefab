@@ -53,7 +53,7 @@ MonoBehaviour:
   shutterCloseSound: {fileID: 8300000, guid: 66a3ae49864185347adbc8ef96b6ace5, type: 3}
   gravcastVolume: 1
   spellcastVolume: 1
-  playerDeathSoundVolume: 1
+  playerDeathSoundVolume: 0.25
   slimeDeathSoundVolume: 0.2
   spellImpactSoundVolume: 0.2
   shutterOpenVolume: 0.5

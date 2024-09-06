@@ -32,13 +32,15 @@ public class Player : MonoBehaviour
     }
 
     public void Die() {
+
         LevelManager.Instance.RestartLevel(deathFadeTime);
-
-        CreateDeathPrefab();
-        Destroy(gameObject);
-
         SoundManager.Instance?.PlayPlayerDeathSound();
         CinemachineShake.Instance?.ShakeCamera(deathCameraShakeIntensity, deathCameraShakeTime);
+
+        CreateDeathPrefab();
+
+        Destroy(gameObject);
+
     }
 
     private void CreateDeathPrefab() {

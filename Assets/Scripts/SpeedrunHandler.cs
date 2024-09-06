@@ -43,6 +43,7 @@ public class SpeedrunHandler : MonoBehaviour
         return currTime;
     }
 
+
     public void RestartSpeedrun() {
         speedrunning = true;
         currTime = 0f;

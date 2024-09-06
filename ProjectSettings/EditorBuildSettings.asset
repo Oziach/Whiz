@@ -42,8 +42,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Level9.unity
     guid: 6310f006d9680cb4a96201c2ad3b5b7e
   - enabled: 1
-    path: Assets/Scenes/Level11.unity
+    path: Assets/Scenes/Level10.unity
     guid: 90f58ad14a46113439b29aa3a1cd01e2
+  - enabled: 1
+    path: Assets/Scenes/Level11.unity
+    guid: eb4fe591168835640b83b909dd4d8edd
+  - enabled: 1
+    path: Assets/Scenes/Level12.unity
+    guid: b2a295c3b1fa3dd45afd0711b58f487d
   - enabled: 1
     path: Assets/Scenes/TreasureRoom.unity
     guid: beff3488749dab041975b22025641a63

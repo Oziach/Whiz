@@ -4374,6 +4374,42 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -29.245394
       objectReference: {fileID: 0}
+    - target: {fileID: 2679608832040208786, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_text
+      value: E
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679608832040208786, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2258b5bd5bae5e8419de7d3baf5fe36f, type: 2}
+    - target: {fileID: 2679608832040208786, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 5313157731911156104, guid: 2258b5bd5bae5e8419de7d3baf5fe36f, type: 2}
+    - target: {fileID: 2679608832040208786, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764407903170444928, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.4465551
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764407903170444928, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.322918
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764407903170444928, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.236372
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764407903170444928, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764407903170444928, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -8.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4358891923374662784, guid: 8d51006db7ee85e44ab1d3850697f010, type: 3}
       propertyPath: m_Name
       value: Tutorial
@@ -12435,7 +12471,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 2
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -12535,14 +12571,14 @@ RectTransform:
   m_GameObject: {fileID: 8494513100467381829}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000315, y: 1.0000315, z: 1.0000315}
+  m_LocalScale: {x: 1.2316267, y: 1.2316267, z: 1.2316267}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 452606999380238083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.9654188, y: -5.930781}
+  m_AnchoredPosition: {x: 2.9654188, y: 9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1839836115661910999
@@ -13901,7 +13937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Z
+  m_text: q
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2258b5bd5bae5e8419de7d3baf5fe36f, type: 2}
   m_sharedMaterial: {fileID: 5313157731911156104, guid: 2258b5bd5bae5e8419de7d3baf5fe36f, type: 2}

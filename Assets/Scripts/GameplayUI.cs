@@ -39,7 +39,7 @@ public class GameplayUI : MonoBehaviour
     void Update()
     {
         if (SpeedrunHandler.Instance && SpeedrunHandler.Instance.IsSpeedrunning() && speedrunTimer) {
-            speedrunTimer.text = SpeedrunHandler.Instance.GetCurrSpeedrunTime().ToString("F2");
+            speedrunTimer.text = GetFormattedTime();
         }
     }
 
@@ -47,6 +47,22 @@ public class GameplayUI : MonoBehaviour
         if (!gravityArrow) { return;  }
         gravityArrow.transform.right = dir;
     }
+    
+    string GetFormattedTime() {
+
+        float currTime = SpeedrunHandler.Instance.GetCurrSpeedrunTime();
+        int mins = (int)(currTime / 60);
+        int hours = (int)(currTime / 60 / 60);
+        int seconds = (int) (currTime - (hours * 60 * 60) - (mins * 60));
+
+        string timerText = "";
+        if (hours > 0) { timerText += hours.ToString() + ":"; }
+        if (mins > 0) { timerText += mins.ToString() + ":"; }
+        timerText += seconds.ToString();
+
+        return timerText;
+    }
+
 
     public void ShowErrorText() {
         if (errorTextAnim) { errorTextAnim.SetTrigger(SHOW_ERROR_TEXT_TRIGGER); }
@@ -69,10 +85,12 @@ public class GameplayUI : MonoBehaviour
     private void SpeedrunTimerInit() {
         if (SpeedrunHandler.Instance && SpeedrunHandler.Instance.IsSpeedrunning() && speedrunTimer) {
             speedrunTimer.gameObject.SetActive(true);
-            speedrunTimer.text = SpeedrunHandler.Instance.GetCurrSpeedrunTime().ToString("2f");
+            speedrunTimer.text = GetFormattedTime();
         }
         else if(speedrunTimer){
             speedrunTimer.gameObject.SetActive(false);
         }
     }
+
+
 }
